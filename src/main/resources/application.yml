@@ -14,3 +14,6 @@ spring:
   hikari:
     jdbc-url: jdbc:h2:mem
 
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+

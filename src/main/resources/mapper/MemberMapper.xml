@@ -1,0 +1,13 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo_mall.member.mapper.MemberMapper">
+    <select id="getAllMembers" resultType="com.example.demo_mall.member.dto.Member">
+        select *
+        from Customer;
+    </select>
+
+    <select id="getMember" parameterType="String" resultType="com.example.demo_mall.member.dto.Member">
+        select *
+        from Customer
+        where CustomerId = #{id};
+    </select>
+</mapper>
