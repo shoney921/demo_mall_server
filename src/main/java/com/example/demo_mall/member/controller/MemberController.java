@@ -1,7 +1,6 @@
 package com.example.demo_mall.member.controller;
 
 import com.example.demo_mall.member.dto.Customer;
-import com.example.demo_mall.member.dto.Member;
 import com.example.demo_mall.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +28,11 @@ public class MemberController {
     @GetMapping("/{id}")
     public Customer getMember(@PathVariable("id") String id) {
         return memberService.getMember(id);
+    }
+
+    @GetMapping("/{id}/jpa")
+    public Customer getMemberJpa(@PathVariable("id") String id) {
+        return memberService.getMemberJpa(id);
     }
 
 }

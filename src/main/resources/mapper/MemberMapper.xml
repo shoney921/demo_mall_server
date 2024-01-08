@@ -8,6 +8,6 @@
     <select id="getMember" parameterType="String" resultType="com.example.demo_mall.member.dto.Customer">
         select *
         from customers
-        where customerNumber = #{id};
+        where customer_number = #{id};
     </select>
 </mapper>
