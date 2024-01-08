@@ -1,5 +1,6 @@
 package com.example.demo_mall.member.controller;
 
+import com.example.demo_mall.member.dto.Customer;
 import com.example.demo_mall.member.dto.Member;
 import com.example.demo_mall.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +17,17 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping
-    public List<Member> getAllMembers() {
+    public List<Customer> getAllMembers() {
         return memberService.getAllMembers();
     }
 
-    @GetMapping("/{id}")
-    public Member getMember(@PathVariable("id") String id) {
+    @GetMapping("/jpa")
+    public List<Customer> getAllMembersJpa() {
+        return memberService.getAllMembersJpa();
+    }
 
+    @GetMapping("/{id}")
+    public Customer getMember(@PathVariable("id") String id) {
         return memberService.getMember(id);
     }
 

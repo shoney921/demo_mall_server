@@ -1,7 +1,9 @@
 package com.example.demo_mall.member.service;
 
+import com.example.demo_mall.member.dto.Customer;
 import com.example.demo_mall.member.dto.Member;
 import com.example.demo_mall.member.mapper.MemberMapper;
+import com.example.demo_mall.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,17 @@ import java.util.List;
 public class MemberService {
 
     private final MemberMapper memberMapper;
+    private final MemberRepository memberRepository;
 
-    public List<Member> getAllMembers() {
+    public List<Customer> getAllMembers() {
         return memberMapper.getAllMembers();
     }
 
-    public Member getMember(String id) {
+    public List<Customer> getAllMembersJpa() {
+        return memberRepository.findAll();
+    }
+
+    public Customer getMember(String id) {
         return memberMapper.getMember(id);
     }
 }
