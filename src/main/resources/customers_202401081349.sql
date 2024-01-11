@@ -1,5 +1,9 @@
+create database demo_db;
+
+use demo_db;
+
 CREATE TABLE demo_db.customers (
-                                   customer_number BIGINT NOT NULL,
+                                   customer_number BIGINT NOT NULL PRIMARY KEY ,
                                    customer_name VARCHAR(50) NULL,
                                    customer_last_name VARCHAR(50) NULL,
                                    customer_first_name VARCHAR(50) NULL,
