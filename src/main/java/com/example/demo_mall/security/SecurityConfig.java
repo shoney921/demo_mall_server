@@ -30,10 +30,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
+        return http.authorizeHttpRequests( ar -> ar
+                        .anyRequest()
+                        .authenticated()
+                )
                 .formLogin(form -> form
 //                        .loginPage("/login")
                                 .defaultSuccessUrl("/members")
