@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -79,6 +80,18 @@ public class SecurityConfig {
                         .tokenValiditySeconds(3600) // 디폴트 : 14일
                         .alwaysRemember(true)
                         .userDetailsService(userDetailsService)
+                )
+                .sessionManagement(sm -> sm
+                        .maximumSessions(1) // 동시 세션 수
+                        .maxSessionsPreventsLogin(true) // true : 현재 사용자 인증실패 , false : 이전 사용자 세션 만료
+                        .expiredUrl("/expired") // 세션이 만료됐을 때 이동하는 Url
+                )
+                .sessionManagement(sm -> sm
+                        .sessionFixation()
+                        .changeSessionId()
+                )
+                .sessionManagement(sm -> sm
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 )
                 .build();
     }
