@@ -1,12 +1,14 @@
 package com.example.demo_mall.member.service;
 
 import com.example.demo_mall.member.dto.Customer;
+import com.example.demo_mall.member.dto.ReqMemberDto;
 import com.example.demo_mall.member.mapper.MemberMapper;
 import com.example.demo_mall.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -23,10 +25,10 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Customer getMember(String id) {
+    public Optional<Customer> getMember(String id) {
         return memberMapper.getMember(id);
     }
-    public Customer getMemberJpa(String id) {
+    public Optional<Customer> getMemberJpa(String id) {
         return memberRepository.findCustomerByCustomerNumber(Long.parseLong(id));
     }
 }
