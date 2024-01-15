@@ -10,4 +10,35 @@
         from customers
         where customer_number = #{id};
     </select>
+
+    <insert id="insertMember">
+        INSERT INTO demo_db.customers (
+            customer_name,
+            customer_last_name,
+            customer_first_name,
+            phone,
+            address_line1,
+            address_line2,
+            city,
+            state,
+            postal_code,
+            country,
+            sales_rep_employee_number,
+            credit_limit
+        )
+        VALUES (
+            'Atelier graphique',
+            'Schmitt',
+            'Carine ',
+            '40.32.2555',
+            '54, rue Royale',
+            NULL,
+            'Nantes',
+            NULL,
+            '44000',
+            'France',
+            1370,
+            0.0
+        )
+    </insert>
 </mapper>
