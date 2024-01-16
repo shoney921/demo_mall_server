@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -28,9 +30,32 @@ public class SecurityConfig {
     @Autowired
     UserDetailsService userDetailsService;
 
+
+    /**
+     * 스프링 시큐리티 6.0 이상부터는 @Bean으로 사용
+     * Void함수는 사용할 수 없고, AuthenticationManagerBuilder를 리턴하도록 변경
+     * @param auth
+     * @return
+     * @throws Exception
+     */
+    @Primary
+    @Bean
+    public AuthenticationManagerBuilder configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("user").password("{noop}1111").roles("USER");
+        auth.inMemoryAuthentication().withUser("sys").password("{noop}1111").roles("SYS");
+        auth.inMemoryAuthentication().withUser("admin").password("{noop}1111").roles("ADMIN");
+        return auth;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests( ar -> ar
+        return http
+                .authorizeHttpRequests(ar -> ar
+                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/members").hasRole("USER")
+                        .requestMatchers("/user").hasRole("USER")
+                        .requestMatchers("/admin/pay").hasRole("ADMIN")
+//                        .requestMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('SYS')")
                         .anyRequest()
                         .authenticated()
                 )
