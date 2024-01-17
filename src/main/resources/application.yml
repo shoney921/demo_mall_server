@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/demo_db
     username: root
-    password:
+    password: 12tkdgjs
   jpa:
     defer-datasource-initialization: true
     hibernate:
@@ -17,6 +17,9 @@ spring:
 #        dialect: org.hibernate.dialect.MySQL57Dialect
   hikari:
     jdbc-url: jdbc:h2:mem
+
+  flyway:
+    locations: classpath:db/migration/ddl
 
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
