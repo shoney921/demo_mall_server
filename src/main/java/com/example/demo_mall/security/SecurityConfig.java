@@ -59,15 +59,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(ar -> ar
-                        .requestMatchers("/user").hasRole("USER")
-                        .requestMatchers("/admin/pay").hasRole("ADMIN")  // 더 구체적인 범위가 위에 나와야합니다.
-                        .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SYS") // 6.0 이하 버전에서는 antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('SYS')")
-                        .anyRequest()
-                        .authenticated()
-                )
-                .formLogin(withDefaults())
+//                .authorizeHttpRequests(ar -> ar
+//                        .requestMatchers("/user").hasRole("USER")
+//                        .requestMatchers("/admin/pay").hasRole("ADMIN")  // 더 구체적인 범위가 위에 나와야합니다.
+//                        .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SYS") // 6.0 이하 버전에서는 antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('SYS')")
+//                        .anyRequest()
+//                        .authenticated()
+//                )
+//                .formLogin(withDefaults())
+                .authorizeHttpRequests(ar-> ar.anyRequest().permitAll())
+                .csrf(csrf -> csrf.disable())
                 .build();
     }
 
-} 
+}

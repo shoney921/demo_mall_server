@@ -1,44 +1,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo_mall.member.mapper.MemberMapper">
-    <select id="getAllMembers" resultType="com.example.demo_mall.member.dto.Customer">
-        select *
-        from customers;
-    </select>
-
-    <select id="getMember" parameterType="String" resultType="com.example.demo_mall.member.dto.Customer">
-        select *
-        from customers
-        where customer_number = #{id};
-    </select>
-
-    <insert id="insertMember">
-        INSERT INTO demo_db.customers (
-            customer_name,
-            customer_last_name,
-            customer_first_name,
-            phone,
-            address_line1,
-            address_line2,
-            city,
-            state,
-            postal_code,
-            country,
-            sales_rep_employee_number,
-            credit_limit
-        )
-        VALUES (
-            'Atelier graphique',
-            'Schmitt',
-            'Carine ',
-            '40.32.2555',
-            '54, rue Royale',
-            NULL,
-            'Nantes',
-            NULL,
-            '44000',
-            'France',
-            1370,
-            0.0
-        )
+    <insert id="insertMember" parameterType="com.example.demo_mall.member.dto.Member">
+        INSERT INTO member
+            (name, birth, mobile, email, password)
+        VALUES(#{name}, #{birth}, #{mobile}, #{email}, #{password});
     </insert>
+
+    <select id="getAllMember" resultType="com.example.demo_mall.member.dto.Member">
+        select *
+        from member
+    </select>
+    <select id="getMemberById" parameterType="String" resultType="com.example.demo_mall.member.dto.Member">
+        select *
+        from member
+        where member_id = #{memberId}
+    </select>
+
+
+<!--    INSERT INTO post-->
+<!--    (member_id, title, content, create_date, update_date)-->
+<!--    VALUES (#{memberId}, #{title}, #{content}, now(), now())-->
+
 </mapper>

@@ -1,7 +1,7 @@
 package com.example.demo_mall.member.service;
 
 import com.example.demo_mall.member.dto.Customer;
-import com.example.demo_mall.member.dto.ReqMemberDto;
+import com.example.demo_mall.member.dto.Member;
 import com.example.demo_mall.member.mapper.MemberMapper;
 import com.example.demo_mall.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,17 +18,15 @@ public class MemberService {
     private final MemberMapper memberMapper;
     private final MemberRepository memberRepository;
 
-    public List<Customer> getAllMembers() {
-        return memberMapper.getAllMembers();
-    }
-    public List<Customer> getAllMembersJpa() {
-        return memberRepository.findAll();
+    public List<Member> getAllMember() {
+        return memberMapper.getAllMember();
     }
 
-    public Optional<Customer> getMember(String id) {
-        return memberMapper.getMember(id);
+    public Optional<Member> getMember(String id) {
+        return memberMapper.getMemberById(id);
     }
-    public Optional<Customer> getMemberJpa(String id) {
-        return memberRepository.findCustomerByCustomerNumber(Long.parseLong(id));
+
+    public Integer createMember(Member member) {
+        return memberMapper.insertMember(member);
     }
 }

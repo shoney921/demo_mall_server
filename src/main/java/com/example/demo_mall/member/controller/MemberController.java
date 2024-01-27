@@ -1,7 +1,6 @@
 package com.example.demo_mall.member.controller;
 
-import com.example.demo_mall.member.dto.Customer;
-import com.example.demo_mall.member.dto.ReqMemberDto;
+import com.example.demo_mall.member.dto.Member;
 import com.example.demo_mall.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,34 +18,37 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    /**
+     * 전체 맴버 조회
+     * @return
+     */
     @GetMapping
-    public List<Customer> getAllMembers() {
-        return memberService.getAllMembers();
+    public List<Member> getAllMembers() {
+        return memberService.getAllMember();
     }
 
-    @GetMapping("/jpa")
-    public List<Customer> getAllMembersJpa() {
-        return memberService.getAllMembersJpa();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Customer> getMember(@PathVariable("id") String id) {
-        Optional<Customer> member = memberService.getMember(id);
+    /**
+     * 맴버 조회
+     * @param id
+     * @return
+     */
+    @GetMapping("/{memberId}")
+    public ResponseEntity<Member> getMember(@PathVariable("memberId") String id) {
+        Optional<Member> member = memberService.getMember(id);
         return member.map(m -> new ResponseEntity<>(m, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/{id}/jpa")
-    public ResponseEntity<Customer> getMemberJpa(@PathVariable("id") String id) {
-        Optional<Customer> memberJpa = memberService.getMemberJpa(id);
-        return memberJpa.map(m -> new ResponseEntity<>(m, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    /**
+     * 맴버 생성
+     * @param member
+     * @return
+     */
+    @PostMapping
+    public ResponseEntity<Integer> createMember(@RequestBody Member member) {
+        Integer result = memberService.createMember(member);
+        return result == 1 ? new ResponseEntity<>(result, HttpStatus.OK) :
+                new ResponseEntity<>(result, HttpStatus.CONFLICT);
     }
 
-//    @PostMapping
-//    public ResponseEntity<Customer> addMember(ReqMemberDto reqMemberDto) {
-//        Optional<Customer> memberJpa = memberService.(reqMemberDto);
-//        return memberJpa.map(m -> new ResponseEntity<>(m, HttpStatus.OK))
-//                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
 }

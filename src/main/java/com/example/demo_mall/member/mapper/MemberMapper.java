@@ -1,7 +1,6 @@
 package com.example.demo_mall.member.mapper;
 
-import com.example.demo_mall.member.dto.Customer;
-import com.example.demo_mall.member.dto.ReqMemberDto;
+import com.example.demo_mall.member.dto.Member;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -9,9 +8,10 @@ import java.util.Optional;
 
 @Mapper
 public interface MemberMapper {
-    List<Customer> getAllMembers();
+    List<Member> getAllMember();
 
-    Optional<Customer> getMember(String id);
+    Optional<Member> getMemberById(String id);
 
-    Optional<Customer> insertMember(ReqMemberDto reqMemberDto);
+    Integer insertMember(Member member);
+
 }
