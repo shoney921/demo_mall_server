@@ -1,5 +1,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo_mall.member.mapper.MemberMapper">
+<mapper namespace="com.example.demo_mall.member.repository.MemberMapper">
     <insert id="insertMember" parameterType="com.example.demo_mall.member.dto.Member">
         INSERT INTO member
             (name, birth, mobile, email, password)
