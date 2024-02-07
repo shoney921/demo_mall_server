@@ -1,6 +1,7 @@
 package com.example.demo_mall.post.controller;
 
 import com.example.demo_mall.post.dto.Post;
+import com.example.demo_mall.post.dto.ReqUpdatePostDto;
 import com.example.demo_mall.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 @RequestMapping("/posts")
 @RestController
@@ -32,5 +34,15 @@ public class PostController {
     @PostMapping
     public Post createPost(@RequestBody Post post) {
         return postService.createPost(post);
+    }
+
+    @PutMapping("/{postId}")
+    public Post updatePost(@PathVariable("postId") String id, @RequestBody ReqUpdatePostDto req) {
+        return postService.updatePost(Long.parseLong(id), req);
+    }
+
+    @DeleteMapping("/{postId}")
+    public void deletePost(@PathVariable("postId") String id) {
+        postService.deletePost(id);
     }
 }
