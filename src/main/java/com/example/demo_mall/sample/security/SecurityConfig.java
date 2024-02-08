@@ -1,4 +1,4 @@
-package com.example.demo_mall.security;
+package com.example.demo_mall.sample.security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,8 +1,8 @@
-package com.example.demo_mall.post.service;
+package com.example.demo_mall.sample.post.service;
 
-import com.example.demo_mall.post.dto.Post;
-import com.example.demo_mall.post.dto.ReqUpdatePostDto;
-import com.example.demo_mall.post.repository.PostJpaRepository;
+import com.example.demo_mall.sample.post.dto.Post;
+import com.example.demo_mall.sample.post.dto.ReqUpdatePostDto;
+import com.example.demo_mall.sample.post.repository.PostJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

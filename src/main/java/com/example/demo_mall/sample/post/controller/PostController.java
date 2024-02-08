@@ -1,8 +1,8 @@
-package com.example.demo_mall.post.controller;
+package com.example.demo_mall.sample.post.controller;
 
-import com.example.demo_mall.post.dto.Post;
-import com.example.demo_mall.post.dto.ReqUpdatePostDto;
-import com.example.demo_mall.post.service.PostService;
+import com.example.demo_mall.sample.post.dto.Post;
+import com.example.demo_mall.sample.post.dto.ReqUpdatePostDto;
+import com.example.demo_mall.sample.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

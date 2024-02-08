@@ -1,6 +1,6 @@
-package com.example.demo_mall.member.repository;
+package com.example.demo_mall.sample.member.repository;
 
-import com.example.demo_mall.member.dto.Member;
+import com.example.demo_mall.sample.member.dto.Member;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

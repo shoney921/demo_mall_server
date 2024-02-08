@@ -1,6 +1,6 @@
-package com.example.demo_mall.member.repository;
+package com.example.demo_mall.sample.member.repository;
 
-import com.example.demo_mall.member.dto.Member;
+import com.example.demo_mall.sample.member.dto.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

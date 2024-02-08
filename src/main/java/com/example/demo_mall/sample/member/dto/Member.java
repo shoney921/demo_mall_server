@@ -1,4 +1,4 @@
-package com.example.demo_mall.member.dto;
+package com.example.demo_mall.sample.member.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
