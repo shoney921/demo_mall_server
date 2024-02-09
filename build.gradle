@@ -33,8 +33,12 @@ dependencies {
 
     implementation 'com.mysql:mysql-connector-j:8.0.32'
 
+    // Junit에 로그 사용
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
+
+    // 모델매퍼 추가
+    implementation 'org.modelmapper:modelmapper:3.1.1'
 }
 
 tasks.named('test') {
