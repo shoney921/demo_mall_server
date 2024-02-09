@@ -1,5 +1,6 @@
 package com.example.demo_mall.mallapi.service;
 
+import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.example.demo_mall.mallapi.dto.TodoDto;
 import com.example.demo_mall.mallapi.repository.TodoRepository;
 import jakarta.transaction.Transactional;
@@ -70,5 +71,14 @@ class TodoServiceTest {
         Assertions.assertFalse(exists);
     }
 
+    @Test
+    public void testGetList() {
+        PageReqDto pageReqDto = PageReqDto.builder()
+                .page(10)
+                .size(10)
+                .build();
+
+        log.info(todoService.getList(pageReqDto));
+    }
 
 }

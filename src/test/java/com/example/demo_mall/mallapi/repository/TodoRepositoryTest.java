@@ -106,6 +106,7 @@ class TodoRepositoryTest {
         log.info(todo);
         log.info(todoDto);
     }
+
     @Test
     public void testCopyModelMapper() {
         Optional<Todo> byId = todoRepository.findById(203L);
@@ -116,6 +117,13 @@ class TodoRepositoryTest {
 
         log.info(todo);
         log.info(todoDto);
+    }
+
+    @Test
+    public void testSearch1() {
+//        Page<Todo> todos = todoRepository.search1();
+
+//        todos.getContent().forEach(log::info);
     }
 
 }
