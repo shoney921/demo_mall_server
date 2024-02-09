@@ -1,4 +1,4 @@
-package com.example.demo_mall.sample.security;
+package com.example.demo_mall.security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -63,50 +63,20 @@ public class SecurityConfig {
         return auth;
     }
 
-    @Bean
-    public HttpSessionCsrfTokenRepository csrfTokenRepository() {
-        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-        repository.setHeaderName("X-CSRF-TOKEN");
-        return repository;
-    }
+//    @Bean
+//    public HttpSessionCsrfTokenRepository csrfTokenRepository() {
+//        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+//        repository.setHeaderName("X-CSRF-TOKEN");
+//        return repository;
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+                .csrf(cf -> cf.disable())
                 .authorizeHttpRequests(ar -> ar
-//                        .requestMatchers("/login").permitAll() // 로그인 페이지는 모두 접근이 가능하도록 해야함
-//                        .requestMatchers("/user").hasRole("USER")
-//                        .requestMatchers("/admin/pay").hasRole("ADMIN")  // 더 구체적인 범위가 위에 나와야합니다.
-//                        .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SYS") // 6.0 이하 버전에서는 antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('SYS')")
                         .anyRequest().permitAll()
                 )
-                .csrf(c -> c
-                        .csrfTokenRepository(csrfTokenRepository()))
-                .formLogin(f -> f
-                        .successHandler(new AuthenticationSuccessHandler() {
-                            @Override
-                            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                                RequestCache requestCache = new HttpSessionRequestCache();
-                                SavedRequest savedRequest = requestCache.getRequest(request, response);
-                                String redirectUrl = savedRequest.getRedirectUrl();
-                                response.sendRedirect(redirectUrl);
-                            }
-                        })
-                )
-//                .exceptionHandling(xh -> xh
-//                        .authenticationEntryPoint(new AuthenticationEntryPoint() { // 인증이 안된거면 이쪽을 타게됨
-//                            @Override
-//                            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-//                                response.sendRedirect("/login");
-//                            }
-//                        })
-//                        .accessDeniedHandler(new AccessDeniedHandler() { // 인가가 안된거면 이쪽을 타게됨
-//                            @Override
-//                            public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-//                                response.sendRedirect("/denied");
-//                            }
-//                        })
-//                )
                 .build();
     }
 
