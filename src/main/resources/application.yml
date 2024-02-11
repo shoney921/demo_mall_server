@@ -22,10 +22,31 @@ spring:
   main:
     allow-circular-references: true
 
+  #파일 업로드를 위한 설정
+  servlet:
+    multipart:
+      max-request-size: 30MB #
+      max-file-size: 10MB # 한파일의 최대크기
+
+# 업로드 폴더 지정
+org:
+  mall:
+    upload:
+      path: upload
+
+
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true #db는 스네이트 표기법, dto는 카멜케이스 사용 시
 
+# 쿼리의 변수 까지 로깅하기 위함
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
 
 

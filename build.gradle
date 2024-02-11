@@ -54,6 +54,10 @@ dependencies {
             "jakarta.annotation:jakarta.annotation-api",
             "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
 
+    // 썸네일 만들기 위해 추가
+    // https://mvnrepository.com/artifact/net.coobird/thumbnailator
+    implementation 'net.coobird:thumbnailator:0.4.19'
+
 }
 
 tasks.named('test') {
