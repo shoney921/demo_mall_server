@@ -1,24 +1,24 @@
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo_mall.sample.member.repository.MemberMapper">
-    <insert id="insertMember" parameterType="com.example.demo_mall.sample.member.dto.Member">
-        INSERT INTO member
-            (name, birth, mobile, email, password)
-        VALUES(#{name}, #{birth}, #{mobile}, #{email}, #{password});
-    </insert>
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.example.demo_mall.sample.member.repository.MemberMapper">-->
+<!--    <insert id="insertMember" parameterType="com.example.demo_mall.sample.member.dto.Member">-->
+<!--        INSERT INTO member-->
+<!--            (name, birth, mobile, email, password)-->
+<!--        VALUES(#{name}, #{birth}, #{mobile}, #{email}, #{password});-->
+<!--    </insert>-->
 
-    <select id="getAllMember" resultType="com.example.demo_mall.sample.member.dto.Member">
-        select *
-        from member
-    </select>
-    <select id="getMemberById" parameterType="String" resultType="com.example.demo_mall.sample.member.dto.Member">
-        select *
-        from member
-        where member_id = #{memberId}
-    </select>
+<!--    <select id="getAllMember" resultType="com.example.demo_mall.sample.member.dto.Member">-->
+<!--        select *-->
+<!--        from member-->
+<!--    </select>-->
+<!--    <select id="getMemberById" parameterType="String" resultType="com.example.demo_mall.sample.member.dto.Member">-->
+<!--        select *-->
+<!--        from member-->
+<!--        where member_id = #{memberId}-->
+<!--    </select>-->
 
 
-<!--    INSERT INTO post-->
-<!--    (member_id, title, content, create_date, update_date)-->
-<!--    VALUES (#{memberId}, #{title}, #{content}, now(), now())-->
+<!--&lt;!&ndash;    INSERT INTO post&ndash;&gt;-->
+<!--&lt;!&ndash;    (member_id, title, content, create_date, update_date)&ndash;&gt;-->
+<!--&lt;!&ndash;    VALUES (#{memberId}, #{title}, #{content}, now(), now())&ndash;&gt;-->
 
-</mapper>
+<!--</mapper>-->

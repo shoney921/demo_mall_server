@@ -34,11 +34,11 @@ org:
     upload:
       path: upload
 
-
-mybatis:
-  mapper-locations: classpath:/mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true #db는 스네이트 표기법, dto는 카멜케이스 사용 시
+# -- 마이바티스 임시 중단
+#mybatis:
+#  mapper-locations: classpath:/mapper/*.xml
+#  configuration:
+#    map-underscore-to-camel-case: true #db는 스네이트 표기법, dto는 카멜케이스 사용 시
 
 logging:
   level:
