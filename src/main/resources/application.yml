@@ -40,13 +40,16 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true #db는 스네이트 표기법, dto는 카멜케이스 사용 시
 
-# 쿼리의 변수 까지 로깅하기 위함
 logging:
   level:
     org:
+      springframework:
+        security:
+          web: trace # 시큐리티에서 로그 설정
       hibernate:
         type:
           descriptor:
-            sql: trace
+            sql: trace # 쿼리의 변수 까지 로깅하기 위함
+
 
 
