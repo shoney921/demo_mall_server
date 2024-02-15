@@ -52,4 +52,9 @@ logging:
             sql: trace # 쿼리의 변수 까지 로깅하기 위함
 
 
+# 에러 RES JSON에 message, trace 로 메세지 추가
+server:
+  error:
+    include-message: always
+#    include-stacktrace: always
 
