@@ -25,7 +25,7 @@ public class APIRefreshController {
         }
 
         if (authHeader == null || authHeader.length() < 7) {
-            throw new CustomJWTException("INVALID STRING");
+            throw new CustomJWTException("INVALID_STRING");
         }
 
         String accessToken = authHeader.substring(7);
