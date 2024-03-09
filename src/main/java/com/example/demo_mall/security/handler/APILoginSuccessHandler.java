@@ -31,7 +31,7 @@ public class APILoginSuccessHandler implements AuthenticationSuccessHandler {
         claims.put("accessToken", accessToken);
         claims.put("refreshToken", refreshToken);
 
-        // json 출력
+        // json 출력 (스프링 Mvc에서는 해당 내용 만들지 않아도 리턴에서 알아서 되지만, 시큐리티에서는 직접 구현해야함)
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
         printWriter.println(new Gson().toJson(claims));
