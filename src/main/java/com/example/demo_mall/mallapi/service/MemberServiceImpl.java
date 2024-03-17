@@ -3,6 +3,7 @@ package com.example.demo_mall.mallapi.service;
 import com.example.demo_mall.mallapi.domain.Member;
 import com.example.demo_mall.mallapi.domain.MemberRole;
 import com.example.demo_mall.mallapi.dto.MemberDto;
+import com.example.demo_mall.mallapi.dto.MemberModifyDto;
 import com.example.demo_mall.mallapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -31,18 +32,36 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDto getKakaoMember(String accessToken) {
         // todo 1. Access Token을 이용해서 사용자 정보를 가져오기
-        String nickname = getNicknameFromKakaoAccessToken(accessToken);
+        String kakaoLongId = getKakaoLongIdFromKakaoAccessToken(accessToken);
 
         // todo 2. 기존 DB에 회원 정보가 있는 경우
-        Optional<Member> result = memberRepository.findById(nickname);
+        Optional<Member> result = memberRepository.findById(kakaoLongId);
         if (result.isPresent()) {
             return entityToDto(result.get());
         }
 
         // todo 3. 기존 DB에 회원 정보가 없는 경우
-        Member socialMember = makeMember(nickname);
+        Member socialMember = makeMember(kakaoLongId);
         memberRepository.save(socialMember);
         return entityToDto(socialMember);
+    }
+
+    @Override
+    public void modifyMember(MemberModifyDto memberModifyDto) {
+        Optional<Member> result = memberRepository.findById(memberModifyDto.getEmail());
+
+        Member member = result.orElseThrow();
+
+        member.changeNickname(memberModifyDto.getNickname());
+        member.changeSocial(false);
+        member.changPw(passwordEncoder.encode(memberModifyDto.getPw()));
+
+        memberRepository.save(member);
+    }
+
+    @Override
+    public boolean isDuplicateNickname(String nickname) {
+        return memberRepository.existsByNickname(nickname);
     }
 
     private Member makeMember(String email) {
@@ -62,8 +81,13 @@ public class MemberServiceImpl implements MemberService {
         return member;
     }
 
-
-    private String getNicknameFromKakaoAccessToken(String accessToken) {
+    /**
+     * kakao에서 회원 정보 가져오기 (long id 만 사용하고 있음)
+     * (추가 사용 정보가 필요하면 해당 메서드에서 사용하면 됨)
+     * @param accessToken
+     * @return
+     */
+    private String getKakaoLongIdFromKakaoAccessToken(String accessToken) {
         String kakaoGetUserUrl = "https://kapi.kakao.com/v2/user/me";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -77,12 +101,10 @@ public class MemberServiceImpl implements MemberService {
         ResponseEntity<LinkedHashMap> response =
                 restTemplate.exchange(uriBuilder.toUri(), HttpMethod.GET, entity, LinkedHashMap.class);
         log.info("response : " + response);
-        LinkedHashMap<String, LinkedHashMap> bodyMap = response.getBody();
-        LinkedHashMap<String, String> kakaoAccount = bodyMap.get("properties");
-        log.info("kakaoAccount : " + kakaoAccount);
-        String nickname = kakaoAccount.get("nickname");
-        log.info("nickname : " + nickname);
-        return nickname;
+        LinkedHashMap<String, Long> bodyMap = response.getBody();
+
+        String id = bodyMap.get("id").toString();
+        return id;
     }
 
     private String makeTempPassword() {

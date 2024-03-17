@@ -34,7 +34,7 @@ public class Member {
         memberRoleList.add(memberRole);
     }
 
-    public void clearRole(){
+    public void clearRole() {
         memberRoleList.clear();
     }
 
@@ -46,4 +46,7 @@ public class Member {
         this.social = social;
     }
 
+    public void changeNickname(String nickname){
+        this.nickname = nickname;
+    }
 }
