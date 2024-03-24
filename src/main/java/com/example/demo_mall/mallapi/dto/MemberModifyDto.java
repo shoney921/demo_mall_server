@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class MemberModifyDto {
 
+    private Long id;
+
     private String email;
 
     private String pw;

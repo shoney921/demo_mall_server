@@ -18,6 +18,8 @@ import java.util.List;
 public class Member {
 
     @Id
+    private Long id;
+
     private String email;
 
     private String pw;
@@ -48,5 +50,9 @@ public class Member {
 
     public void changeNickname(String nickname){
         this.nickname = nickname;
+    }
+
+    public void changeId(Long id) {
+        this.id = id;
     }
 }

@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 @ToString
 public class MemberDto extends User {
 
+    private Long id;
+
     private String email;
 
     private String pw;
@@ -23,10 +25,11 @@ public class MemberDto extends User {
 
     private List<String> roleNames = new ArrayList<>();
 
-    public MemberDto(String email, String pw, String nickname, boolean social, List<String> roleNames) {
+    public MemberDto(Long id, String email, String pw, String nickname, boolean social, List<String> roleNames) {
         //super(username, password, authorities);
-        super(email, pw, roleNames.stream().map(roleName ->
+        super(id.toString(), pw, roleNames.stream().map(roleName ->
                 new SimpleGrantedAuthority("ROLE_" + roleName)).collect(Collectors.toList()));
+        this.id = id;
         this.email = email;
         this.pw = pw;
         this.nickname = nickname;
