@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface MemberRepository extends JpaRepository<Member, String> {
+public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @EntityGraph(attributePaths = {"memberRoleList"})
-    @Query("select m from Member m where m.email = :email")
-    Member getWithRoles(@Param("email") String email);
+    @Query("select m from Member m where m.id = :id")
+    Member getWithRoles(@Param("id") Long id);
 
     boolean existsByNickname(String nickname);
 }

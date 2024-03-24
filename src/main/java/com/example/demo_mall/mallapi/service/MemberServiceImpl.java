@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDto getKakaoMember(String accessToken) {
         // todo 1. Access Token을 이용해서 사용자 정보를 가져오기
-        String kakaoLongId = getKakaoLongIdFromKakaoAccessToken(accessToken);
+        Long kakaoLongId = getKakaoLongIdFromKakaoAccessToken(accessToken);
 
         // todo 2. 기존 DB에 회원 정보가 있는 경우
         Optional<Member> result = memberRepository.findById(kakaoLongId);
@@ -48,10 +48,11 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void modifyMember(MemberModifyDto memberModifyDto) {
-        Optional<Member> result = memberRepository.findById(memberModifyDto.getEmail());
+        Optional<Member> result = memberRepository.findById(memberModifyDto.getId());
 
         Member member = result.orElseThrow();
 
+        member.changeId(memberModifyDto.getId());
         member.changeNickname(memberModifyDto.getNickname());
         member.changeSocial(false);
         member.changPw(passwordEncoder.encode(memberModifyDto.getPw()));
@@ -64,13 +65,14 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.existsByNickname(nickname);
     }
 
-    private Member makeMember(String email) {
+    private Member makeMember(Long id) {
         String tempPassword = makeTempPassword();
 
         log.info("tempPassword : " + tempPassword);
 
         Member member = Member.builder()
-                .email(email)
+                .id(id)
+                .email("")
                 .pw(passwordEncoder.encode(tempPassword))
                 .nickname("Social Member")
                 .social(true)
@@ -87,7 +89,7 @@ public class MemberServiceImpl implements MemberService {
      * @param accessToken
      * @return
      */
-    private String getKakaoLongIdFromKakaoAccessToken(String accessToken) {
+    private Long getKakaoLongIdFromKakaoAccessToken(String accessToken) {
         String kakaoGetUserUrl = "https://kapi.kakao.com/v2/user/me";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -103,8 +105,7 @@ public class MemberServiceImpl implements MemberService {
         log.info("response : " + response);
         LinkedHashMap<String, Long> bodyMap = response.getBody();
 
-        String id = bodyMap.get("id").toString();
-        return id;
+        return bodyMap.get("id");
     }
 
     private String makeTempPassword() {

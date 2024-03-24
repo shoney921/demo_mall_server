@@ -19,6 +19,7 @@ public interface MemberService {
 
     default MemberDto entityToDto(Member member) {
         return new MemberDto(
+                member.getId(),
                 member.getEmail(),
                 member.getPw(),
                 member.getNickname(),
