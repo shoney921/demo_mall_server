@@ -22,12 +22,13 @@ public class CustomUserDetailService implements UserDetailsService {
 
         log.info("=====================loadUserByUsername========================");
         log.info("user name" + username);
-        Member member = memberRepository.getWithRoles(username);
+        Member member = memberRepository.getWithRoles(Long.parseLong(username));
 
         if (member == null) {
             throw new UsernameNotFoundException("Not Found");
         }
         MemberDto memberDto = new MemberDto(
+                member.getId(),
                 member.getEmail(), member.getPw(), member.getNickname(), member.isSocial(),
                 member.getMemberRoleList().stream().map(Enum::name).toList());
 
