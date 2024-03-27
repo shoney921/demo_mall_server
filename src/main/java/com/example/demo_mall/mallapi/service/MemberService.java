@@ -4,6 +4,7 @@ package com.example.demo_mall.mallapi.service;
 import com.example.demo_mall.mallapi.domain.Member;
 import com.example.demo_mall.mallapi.dto.MemberDto;
 import com.example.demo_mall.mallapi.dto.MemberModifyDto;
+import com.example.demo_mall.mallapi.dto.MemberSignupDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
@@ -29,4 +30,6 @@ public interface MemberService {
                 ).collect(Collectors.toList())
         );
     }
+
+    Long create(MemberSignupDto memberSignupDto);
 }

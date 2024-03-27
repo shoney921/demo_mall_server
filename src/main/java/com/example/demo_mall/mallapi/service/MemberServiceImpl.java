@@ -4,6 +4,7 @@ import com.example.demo_mall.mallapi.domain.Member;
 import com.example.demo_mall.mallapi.domain.MemberRole;
 import com.example.demo_mall.mallapi.dto.MemberDto;
 import com.example.demo_mall.mallapi.dto.MemberModifyDto;
+import com.example.demo_mall.mallapi.dto.MemberSignupDto;
 import com.example.demo_mall.mallapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -63,6 +64,21 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean isDuplicateNickname(String nickname) {
         return memberRepository.existsByNickname(nickname);
+    }
+
+    @Override
+    public Long create(MemberSignupDto memberSignupDto) {
+        Member member = Member.builder()
+                .email(memberSignupDto.getEmail())
+                .nickname(memberSignupDto.getNickname())
+                .pw(passwordEncoder.encode(memberSignupDto.getPw()))
+                .social(false)
+                .build();
+        member.addRole(MemberRole.USER);
+
+        Member newMember = memberRepository.save(member);
+
+        return newMember.getId();
     }
 
     private Member makeMember(Long id) {

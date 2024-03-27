@@ -2,6 +2,7 @@ package com.example.demo_mall.mallapi.controller;
 
 import com.example.demo_mall.mallapi.dto.MemberDto;
 import com.example.demo_mall.mallapi.dto.MemberModifyDto;
+import com.example.demo_mall.mallapi.dto.MemberSignupDto;
 import com.example.demo_mall.mallapi.service.MemberService;
 import com.example.demo_mall.security.util.JWTUtil;
 import lombok.Getter;
@@ -36,7 +37,6 @@ public class SocialController {
 
     @PutMapping("/api/member/modify")
     public Map<String, String> modify(@RequestBody MemberModifyDto memberModifyDto) {
-        log.info("------modify controller modify--------------");
         memberService.modifyMember(memberModifyDto);
         return Map.of("result", "modified");
     }
@@ -46,4 +46,12 @@ public class SocialController {
         String result = memberService.isDuplicateNickname(nickname)? "true" : "false";
         return Map.of("result", result);
     }
+
+    @PostMapping("/api/member/signup")
+    public Map<String, String> signup(@RequestBody MemberSignupDto memberSignupDto) {
+        log.info("------new controller--------------");
+        Long id = memberService.create(memberSignupDto);
+        return Map.of("result", id.toString());
+    }
+
 }
