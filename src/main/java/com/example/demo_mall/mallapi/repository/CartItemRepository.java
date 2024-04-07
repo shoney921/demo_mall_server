@@ -19,7 +19,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
             "where mc.owner.id = :id " +
             "and pi.ord = 0 " +
             "order by ci.cino desc")
-    List<CartItemListDto> getItemsOfCartDtoById(@Param("memberId") Long id);
+    List<CartItemListDto> getItemsOfCartDtoByMemberId(@Param("memberId") Long id);
 
     @Query("select ci " +
             "from CartItem ci " +

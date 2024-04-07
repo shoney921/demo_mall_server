@@ -30,7 +30,7 @@ class CartItemRepositoryTest {
     public void testListOfMember() {
         Long memberId = 9L;
 
-        List<CartItemListDto> itemsOfCartDtoById = cartItemRepository.getItemsOfCartDtoById(memberId);
+        List<CartItemListDto> itemsOfCartDtoById = cartItemRepository.getItemsOfCartDtoByMemberId(memberId);
 
         log.info(itemsOfCartDtoById);
     }
