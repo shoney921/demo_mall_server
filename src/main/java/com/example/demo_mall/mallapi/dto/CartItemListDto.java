@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @NoArgsConstructor
-public class CartItemLIstDto {
+public class CartItemListDto {
 
     private Long cino;
 
@@ -19,7 +19,7 @@ public class CartItemLIstDto {
 
     private String imageFile;
 
-    public CartItemLIstDto(Long cino, int qty, String pname, int price, String imageFile) {
+    public CartItemListDto(Long cino, int qty, String pname, int price, String imageFile) {
         this.cino = cino;
         this.qty = qty;
         this.pname = pname;
