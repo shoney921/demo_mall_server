@@ -28,7 +28,7 @@ public class CustomUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("Not Found");
         }
         MemberDto memberDto = new MemberDto(
-                member.getId(),
+                member.getId(), member.getKakaoId(),
                 member.getEmail(), member.getPw(), member.getNickname(), member.isSocial(),
                 member.getMemberRoleList().stream().map(Enum::name).toList());
 
