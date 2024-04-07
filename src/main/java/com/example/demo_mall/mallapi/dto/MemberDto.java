@@ -15,6 +15,8 @@ public class MemberDto extends User {
 
     private Long id;
 
+    private Long kakaoId;
+
     private String email;
 
     private String pw;
@@ -25,11 +27,12 @@ public class MemberDto extends User {
 
     private List<String> roleNames = new ArrayList<>();
 
-    public MemberDto(Long id, String email, String pw, String nickname, boolean social, List<String> roleNames) {
+    public MemberDto(Long id, Long kakaoId, String email, String pw, String nickname, boolean social, List<String> roleNames) {
         //super(username, password, authorities);
         super(id.toString(), pw, roleNames.stream().map(roleName ->
                 new SimpleGrantedAuthority("ROLE_" + roleName)).collect(Collectors.toList()));
         this.id = id;
+        this.kakaoId = kakaoId;
         this.email = email;
         this.pw = pw;
         this.nickname = nickname;

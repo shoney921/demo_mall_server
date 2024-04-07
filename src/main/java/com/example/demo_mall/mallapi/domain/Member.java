@@ -18,6 +18,8 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long kakaoId;
+
     private String email;
 
     private String pw;

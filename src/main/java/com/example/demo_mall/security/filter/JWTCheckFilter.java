@@ -56,12 +56,13 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             // 2.토큰 validation 성공 이후
             // 2-1. 사용자 정보 를 dto화
             Long id = (Long) claims.get("id");
+            Long kakaoId = (Long) claims.get("kakaoId");
             String email = (String) claims.get("email");
             String pw = (String) claims.get("pw");
             String nickname = (String) claims.get("nickname");
             Boolean social = (Boolean) claims.get("social");
             List<String> roleNames = (List<String>) claims.get("roleNames");
-            MemberDto memberDto = new MemberDto( id, email, pw, nickname, social.booleanValue(),
+            MemberDto memberDto = new MemberDto( id, kakaoId, email, pw, nickname, social.booleanValue(),
                     roleNames);
             log.info("-----------------------------------");
             log.info(memberDto);

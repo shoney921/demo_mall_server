@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
         Long kakaoLongId = getKakaoLongIdFromKakaoAccessToken(accessToken);
 
         // todo 2. 기존 DB에 회원 정보가 있는 경우
-        Optional<Member> result = memberRepository.findById(kakaoLongId);
+        Optional<Member> result = memberRepository.findByKakaoId(kakaoLongId);
         if (result.isPresent()) {
             return entityToDto(result.get());
         }
@@ -81,16 +81,16 @@ public class MemberServiceImpl implements MemberService {
         return newMember.getId();
     }
 
-    private Member makeMember(Long id) {
+    private Member makeMember(Long kakaoId) {
         String tempPassword = makeTempPassword();
 
         log.info("tempPassword : " + tempPassword);
 
         Member member = Member.builder()
-                .id(id)
+                .kakaoId(kakaoId)
                 .email("")
                 .pw(passwordEncoder.encode(tempPassword))
-                .nickname("Social Member")
+                .nickname("")
                 .social(true)
                 .build();
 

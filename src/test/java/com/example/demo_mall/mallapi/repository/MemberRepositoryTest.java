@@ -41,9 +41,9 @@ class MemberRepositoryTest {
 
     @Test
     public void testRead() {
-        String email = "user8@aaa.com";
+        Long id = 3372524755L;
 
-        Member withRoles = memberRepository.getWithRoles(email);
+        Member withRoles = memberRepository.getWithRoles(id);
 
         log.info(withRoles);
         log.info(withRoles.getMemberRoleList());
