@@ -131,4 +131,11 @@ public class MemberServiceImpl implements MemberService {
         }
         return buffer.toString();
     }
+
+    @Override
+    public Long getLongIdFromEmail(String email) {
+        Optional<Member> byEmail = memberRepository.findByEmail(email);
+        if(byEmail.isEmpty()) return -1L;
+        return byEmail.get().getId();
+    }
 }

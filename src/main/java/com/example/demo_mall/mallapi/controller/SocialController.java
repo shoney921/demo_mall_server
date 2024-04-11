@@ -49,8 +49,13 @@ public class SocialController {
 
     @PostMapping("/api/member/signup")
     public Map<String, String> signup(@RequestBody MemberSignupDto memberSignupDto) {
-        log.info("------new controller--------------");
         Long id = memberService.create(memberSignupDto);
+        return Map.of("result", id.toString());
+    }
+
+    @PostMapping("/api/member/email")
+    public Map<String, String> checkEmail(@RequestBody Map<String, String> requestBody) {
+        Long id = memberService.getLongIdFromEmail(requestBody.get("email"));
         return Map.of("result", id.toString());
     }
 

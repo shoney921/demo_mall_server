@@ -33,4 +33,6 @@ public interface MemberService {
     }
 
     Long create(MemberSignupDto memberSignupDto);
+
+    Long getLongIdFromEmail(String email);
 }
