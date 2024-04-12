@@ -40,7 +40,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             return true;
         }
         //스웨거는 필터 체크하지 않음
-        if (path.startsWith("/swagger-ui/")) {
+        if (path.startsWith("/swagger-ui")||path.startsWith("/api-docs")) {
             return true;
         }
         return false;
