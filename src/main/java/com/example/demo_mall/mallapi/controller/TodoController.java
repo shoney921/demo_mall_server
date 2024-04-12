@@ -2,6 +2,7 @@ package com.example.demo_mall.mallapi.controller;
 
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.example.demo_mall.mallapi.dto.PageResDto;
+import com.example.demo_mall.mallapi.dto.ResultResDto;
 import com.example.demo_mall.mallapi.dto.TodoDto;
 import com.example.demo_mall.mallapi.service.TodoService;
 import lombok.RequiredArgsConstructor;
@@ -29,22 +30,28 @@ public class TodoController {
     }
 
     @PostMapping("/")
-    public Map<String, Long> register(@RequestBody TodoDto todoDto) {
+    public ResultResDto register(@RequestBody TodoDto todoDto) {
         Long registeredTno = todoService.register(todoDto);
-        return Map.of("tno", registeredTno); // todo : [팀싱크] map으로 반환 해달라고 할때 이렇게 쉽게 사용하는게 낫다
+        return ResultResDto.builder()
+                .result(registeredTno.toString())
+                .build();
     }
 
     @PutMapping("/{tno}")
-    public Map<String, String> modify(@PathVariable("tno") Long tno,
-                                      @RequestBody TodoDto todoDto) {
+    public ResultResDto modify(@PathVariable("tno") Long tno,
+                               @RequestBody TodoDto todoDto) {
         todoDto.setTno(tno);
         todoService.modify(todoDto);
-        return Map.of("result", "success");
+        return ResultResDto.builder()
+                .result("success")
+                .build();
     }
 
     @DeleteMapping("/{tno}")
-    public Map<String, String> remove(@PathVariable("tno") Long tno) {
+    public ResultResDto remove(@PathVariable("tno") Long tno) {
         todoService.remove(tno);
-        return Map.of("result", "success");
+        return ResultResDto.builder()
+                .result("success")
+                .build();
     }
 }

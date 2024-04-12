@@ -1,13 +1,12 @@
 package com.example.demo_mall.mallapi.controller;
 
-import com.example.demo_mall.mallapi.dto.MemberDto;
-import com.example.demo_mall.mallapi.dto.MemberModifyDto;
-import com.example.demo_mall.mallapi.dto.MemberSignupDto;
+import com.example.demo_mall.mallapi.dto.*;
 import com.example.demo_mall.mallapi.service.MemberService;
 import com.example.demo_mall.security.util.JWTUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -20,7 +19,7 @@ public class SocialController {
     private final MemberService memberService;
 
     @GetMapping("/api/member/kakao")
-    public Map<String, Object> getMemberFromKakao(String accessToken) {
+    public TokenResDto getMemberFromKakao(String accessToken) {
         log.info("accessToken : " + accessToken);
         MemberDto kakaoMember = memberService.getKakaoMember(accessToken);
 
@@ -32,31 +31,38 @@ public class SocialController {
         claims.put("accessToken", jwtAccessToken);
         claims.put("refreshToken", jwtRefreshToken);
 
-        return claims;
+        TokenResDto tokenResDto = TokenResDto.builder()
+                .accessToken(jwtAccessToken)
+                .refreshToken(jwtRefreshToken)
+                .build();
+
+        BeanUtils.copyProperties(kakaoMember, tokenResDto);
+
+        return tokenResDto;
     }
 
     @PutMapping("/api/member/modify")
-    public Map<String, String> modify(@RequestBody MemberModifyDto memberModifyDto) {
+    public ResultResDto modify(@RequestBody MemberModifyDto memberModifyDto) {
         memberService.modifyMember(memberModifyDto);
-        return Map.of("result", "modified");
+        return ResultResDto.builder().result("modified").build();
     }
 
     @GetMapping("/api/member/duplicate")
-    public Map<String, String> checkDup(String nickname) {
+    public ResultResDto checkDup(String nickname) {
         String result = memberService.isDuplicateNickname(nickname)? "true" : "false";
-        return Map.of("result", result);
+        return ResultResDto.builder().result(result).build();
     }
 
     @PostMapping("/api/member/signup")
-    public Map<String, String> signup(@RequestBody MemberSignupDto memberSignupDto) {
+    public ResultResDto signup(@RequestBody MemberSignupDto memberSignupDto) {
         Long id = memberService.create(memberSignupDto);
-        return Map.of("result", id.toString());
+        return ResultResDto.builder().result( id.toString()).build();
     }
 
     @PostMapping("/api/member/email")
-    public Map<String, String> checkEmail(@RequestBody Map<String, String> requestBody) {
+    public ResultResDto checkEmail(@RequestBody Map<String, String> requestBody) {
         Long id = memberService.getLongIdFromEmail(requestBody.get("email"));
-        return Map.of("result", id.toString());
+        return ResultResDto.builder().result( id.toString()).build();
     }
 
 }

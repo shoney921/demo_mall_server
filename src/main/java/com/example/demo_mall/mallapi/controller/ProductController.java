@@ -3,6 +3,7 @@ package com.example.demo_mall.mallapi.controller;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.example.demo_mall.mallapi.dto.PageResDto;
 import com.example.demo_mall.mallapi.dto.ProductDto;
+import com.example.demo_mall.mallapi.dto.ResultResDto;
 import com.example.demo_mall.mallapi.service.ProductService;
 import com.example.demo_mall.mallapi.util.CustomFileUtil;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @Log4j2
@@ -31,12 +31,12 @@ public class ProductController {
     }
 
     @PostMapping("/")
-    public Map<String, Long> register(ProductDto productDto) {
+    public ResultResDto register(ProductDto productDto) {
         List<MultipartFile> files = productDto.getFiles();
         List<String> fileNames = fileUtil.saveFiles(files);
         productDto.setUploadedFileNames(fileNames);
         Long pno = productService.register(productDto);
-        return Map.of("result", pno);
+        return ResultResDto.builder().result(pno.toString()).build();
     }
 
     @GetMapping("/{pno}")
@@ -50,7 +50,7 @@ public class ProductController {
     }
 
     @PutMapping("/{pno}")
-    public Map<String, String> modify(@PathVariable("pno") Long pno, ProductDto productDto) {
+    public ResultResDto modify(@PathVariable("pno") Long pno, ProductDto productDto) {
         productDto.setPno(pno);
 
         List<MultipartFile> files = productDto.getFiles();
@@ -69,17 +69,14 @@ public class ProductController {
                     .filter(fileName -> !uploadedFileNames.contains(fileName)).toList();
             fileUtil.deleteFiles(collect);
         }
-
-        return Map.of("result", "success");
+        return ResultResDto.builder().result("success").build();
     }
 
     @DeleteMapping("/{pno}")
-    public Map<String, String> remove(@PathVariable("pno") Long pno) {
+    public ResultResDto remove(@PathVariable("pno") Long pno) {
         ProductDto productDto = productService.get(pno);
         fileUtil.deleteFiles(productDto.getUploadedFileNames());
         productService.remove(pno);
-        return Map.of("resutl", "success");
+        return ResultResDto.builder().result("success").build();
     }
-
-
 }
