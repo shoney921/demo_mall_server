@@ -11,7 +11,7 @@ import java.util.List;
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
     @Query("select " +
-            "new com.example.demo_mall.mallapi.dto.CartItemListDto(ci.cino, ci.qty, p.pname, p.price, pi.fileName) " +
+            "new com.example.demo_mall.mallapi.dto.CartItemListDto(ci.cino, p.pno, ci.qty, p.pname, p.price, pi.fileName) " +
             "from CartItem ci " +
             "inner join Cart mc on ci.cart = mc  " +
             "left join Product p on ci.product = p " +

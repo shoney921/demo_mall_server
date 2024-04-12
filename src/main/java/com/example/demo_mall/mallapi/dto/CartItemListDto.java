@@ -1,15 +1,19 @@
 package com.example.demo_mall.mallapi.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class CartItemListDto {
 
     private Long cino;
+
+    private Long pno;
 
     private int qty;
 
@@ -18,12 +22,4 @@ public class CartItemListDto {
     private int price;
 
     private String imageFile;
-
-    public CartItemListDto(Long cino, int qty, String pname, int price, String imageFile) {
-        this.cino = cino;
-        this.qty = qty;
-        this.pname = pname;
-        this.price = price;
-        this.imageFile = imageFile;
-    }
 }
