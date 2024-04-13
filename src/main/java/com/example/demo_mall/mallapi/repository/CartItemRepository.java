@@ -5,9 +5,11 @@ import com.example.demo_mall.mallapi.dto.CartItemListDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
     @Query("select " +
@@ -34,7 +36,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     Long getCartFromItem(@Param("cino") Long cino);
 
     @Query("select " +
-            "new com.example.demo_mall.mallapi.dto.CartItemListDto(ci.cino, ci.qty, p.pname, p.price, pi.fileName) " +
+            "new com.example.demo_mall.mallapi.dto.CartItemListDto(ci.cino, p.pno, ci.qty, p.pname, p.price, pi.fileName) " +
             "from CartItem ci " +
             "inner join Cart c on ci.cart = c " +
             "left join Product p on ci.product = p " +
@@ -44,5 +46,6 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
             "order by ci.cino desc")
     List<CartItemListDto> getItemsOfCartDtoByCart(@Param("cno") Long cno);
 
+    void deleteByCino(Long cino);
 }
 

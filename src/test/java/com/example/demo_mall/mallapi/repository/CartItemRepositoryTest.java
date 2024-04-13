@@ -7,6 +7,7 @@ import com.example.demo_mall.mallapi.domain.Product;
 import com.example.demo_mall.mallapi.dto.CartItemListDto;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
@@ -109,6 +110,16 @@ class CartItemRepositoryTest {
             log.info(cartItemListDto);
         }
 
+    }
+
+    @Test
+    @Transactional
+    public void removeTest() {
+        Long cino = 10L;
+
+        cartItemRepository.deleteByCino(cino);
+
+        Long cartFromItem = cartItemRepository.getCartFromItem(cino);
     }
 
 }

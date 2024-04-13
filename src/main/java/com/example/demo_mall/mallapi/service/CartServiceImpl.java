@@ -8,6 +8,7 @@ import com.example.demo_mall.mallapi.dto.CartItemDto;
 import com.example.demo_mall.mallapi.dto.CartItemListDto;
 import com.example.demo_mall.mallapi.repository.CartItemRepository;
 import com.example.demo_mall.mallapi.repository.CartRepository;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class CartServiceImpl implements CartService {
 
     private final CartItemRepository cartItemRepository;
 
+    private final EntityManager entityManager;
 
     @Override
     public List<CartItemListDto> addOrModify(CartItemDto cartItemDto) {
@@ -74,7 +76,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartItemListDto> remove(Long cino) {
         Long cno = cartItemRepository.getCartFromItem(cino);
-        cartItemRepository.deleteById(cino);
+        cartItemRepository.deleteByCino(cino);
         return cartItemRepository.getItemsOfCartDtoByCart(cno);
     }
 }
