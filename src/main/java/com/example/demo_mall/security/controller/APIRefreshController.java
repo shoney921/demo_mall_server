@@ -4,10 +4,7 @@ import com.example.demo_mall.security.util.CustomJWTException;
 import com.example.demo_mall.security.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -16,7 +13,7 @@ import java.util.Map;
 @Log4j2
 public class APIRefreshController {
 
-    @PostMapping("/api/member/refresh")
+    @GetMapping("/api/member/refresh")
     public Map<String, String> refresh(
             @RequestHeader("Authorization") String authHeader,
             String refreshToken) {
