@@ -6,6 +6,8 @@ import com.example.demo_mall.mallapi.dto.ProductDto;
 import com.example.demo_mall.mallapi.dto.ResultResDto;
 import com.example.demo_mall.mallapi.service.ProductService;
 import com.example.demo_mall.mallapi.util.CustomFileUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.Resource;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@Tag(name = "Product API", description = "제품 API")
 @RestController
 @Log4j2
 @RequiredArgsConstructor
@@ -22,14 +25,15 @@ import java.util.List;
 public class ProductController {
 
     private final CustomFileUtil fileUtil;
-
     private final ProductService productService;
 
+    @Operation(summary = "제품 리스트 조회", description = "제품 리스트 조회")
     @GetMapping("/list")
     public PageResDto<ProductDto> list(PageReqDto pageReqDto) {
         return productService.getList(pageReqDto);
     }
 
+    @Operation(summary = "제품 등록", description = "제품 등록")
     @PostMapping("/")
     public ResultResDto register(ProductDto productDto) {
         List<MultipartFile> files = productDto.getFiles();
@@ -39,16 +43,19 @@ public class ProductController {
         return ResultResDto.builder().result(pno.toString()).build();
     }
 
+    @Operation(summary = "제품 정보 조회", description = "제품 정보 조회")
     @GetMapping("/{pno}")
     public ProductDto read(@PathVariable("pno") Long pno) {
         return productService.get(pno);
     }
 
+    @Operation(summary = "제품 사진 조회", description = "제품 사진 조회")
     @GetMapping("/view/{fileName}")
     public ResponseEntity<Resource> viewFileGet(@PathVariable("fileName") String fileName) {
         return fileUtil.getFile(fileName);
     }
 
+    @Operation(summary = "제품 정보 변경", description = "제품 정보 변경")
     @PutMapping("/{pno}")
     public ResultResDto modify(@PathVariable("pno") Long pno, ProductDto productDto) {
         productDto.setPno(pno);
@@ -72,6 +79,7 @@ public class ProductController {
         return ResultResDto.builder().result("success").build();
     }
 
+    @Operation(summary = "제품 삭제", description = "제품 삭제")
     @DeleteMapping("/{pno}")
     public ResultResDto remove(@PathVariable("pno") Long pno) {
         ProductDto productDto = productService.get(pno);

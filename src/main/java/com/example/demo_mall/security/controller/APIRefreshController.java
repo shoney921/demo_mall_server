@@ -3,17 +3,20 @@ package com.example.demo_mall.security.controller;
 import com.example.demo_mall.security.dto.RefreshTokenResDto;
 import com.example.demo_mall.security.util.CustomJWTException;
 import com.example.demo_mall.security.util.JWTUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
+@Tag(name = "Refresh Token API", description = "Refresh 토큰 API")
 @RestController
-@RequiredArgsConstructor
 @Log4j2
+@RequiredArgsConstructor
 public class APIRefreshController {
 
+    @Operation(summary = "Refresh Token", description = "Refresh Token 로 Access Token 재발급")
     @GetMapping("/api/member/refresh")
     public RefreshTokenResDto refresh(
             @RequestHeader("Authorization") String authHeader,
