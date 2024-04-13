@@ -10,7 +10,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -47,18 +50,28 @@ public class QnaService {
 
     public PageResDto<QnaDto> getList(PageReqDto pageReqDto) {
 
-        Page<Qna> result = qnaRepository.search1(pageReqDto);
+        Pageable pageable = PageRequest.of(
+                pageReqDto.getPage() - 1,
+                pageReqDto.getSize(),
+                Sort.by("qno").descending());
 
-        List<QnaDto> list = result.getContent().stream().map(
-                todo -> modelMapper.map(todo, QnaDto.class)
-        ).toList();
+        Page<Qna> result = qnaRepository.findAll(pageable);
+
+        List<QnaDto> collect = result.get().map(qna -> {
+            QnaDto qnaDto = QnaDto.builder()
+                    .title(qna.getTitle())
+                    .dueDate(qna.getDueDate())
+                    .qno(qna.getQno())
+                    .writer(qna.getWriter())
+                    .complete(qna.getComplete())
+                    .build();
+            return qnaDto;
+        }).toList();
 
         return PageResDto.<QnaDto>withAll()
-                .dtoList(list)
+                .dtoList(collect)
                 .pageReqDto(pageReqDto)
                 .total(result.getTotalElements())
                 .build();
-
     }
-
 }
