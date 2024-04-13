@@ -1,5 +1,6 @@
 package com.example.demo_mall.security.controller;
 
+import com.example.demo_mall.security.dto.RefreshTokenResDto;
 import com.example.demo_mall.security.util.CustomJWTException;
 import com.example.demo_mall.security.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class APIRefreshController {
 
     @GetMapping("/api/member/refresh")
-    public Map<String, String> refresh(
+    public RefreshTokenResDto refresh(
             @RequestHeader("Authorization") String authHeader,
             String refreshToken) {
 
@@ -29,17 +30,21 @@ public class APIRefreshController {
         String accessToken = authHeader.substring(7);
 
         if (!checkExpiredToken(accessToken)) { // 만료되지 않음
-            return Map.of("accessToken", accessToken, "refreshToken", refreshToken);
+            return RefreshTokenResDto.builder()
+                    .accessToken(accessToken)
+                    .refreshToken(refreshToken)
+                    .build();
         }
 
-        //Refresh토큰 검증
         Map<String, Object> claims = JWTUtil.validateToken(refreshToken);
         log.info("refresh ... claims: " + claims);
         String newAccessToken = JWTUtil.generateToken(claims, 10);
-        String newRefreshToken = checkExpTimeOneHour((Integer) claims.get("exp")) == true ?
+        String newRefreshToken = checkExpTimeOneHour((Integer) claims.get("exp")) ?
                 JWTUtil.generateToken(claims, 60 * 24) : refreshToken;
-        return Map.of("accessToken", newAccessToken, "refreshToken", newRefreshToken);
-
+        return RefreshTokenResDto.builder()
+                .accessToken(newAccessToken)
+                .refreshToken(newRefreshToken)
+                .build();
     }
 
     private boolean checkExpiredToken(String token) {
@@ -53,7 +58,7 @@ public class APIRefreshController {
         return false;
     }
 
-    private boolean checkExpTimeOneHour(Integer exp) { // 만료시간이 한시간 남았는지 체크
+    private boolean checkExpTimeOneHour(Integer exp) {
         java.util.Date expDate = new java.util.Date((long) exp * (1000));
         long gap = expDate.getTime() - System.currentTimeMillis();
         long leftMin = gap / (1000 * 60);
