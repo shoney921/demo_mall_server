@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class TodoDto {
-    private long tno;
+public class QnaDto {
+    private long qno;
     private String title;
     private String writer;
     private Boolean complete;

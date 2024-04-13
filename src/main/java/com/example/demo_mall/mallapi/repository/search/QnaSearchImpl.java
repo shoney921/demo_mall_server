@@ -1,7 +1,7 @@
 package com.example.demo_mall.mallapi.repository.search;
 
-import com.example.demo_mall.mallapi.domain.QTodo;
-import com.example.demo_mall.mallapi.domain.Todo;
+import com.example.demo_mall.mallapi.domain.QQna;
+import com.example.demo_mall.mallapi.domain.Qna;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
@@ -12,19 +12,19 @@ import java.util.List;
 
 
 @Log4j2
-public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSearch {
+public class QnaSearchImpl extends QuerydslRepositorySupport implements QnaSearch {
 
-    public TodoSearchImpl() {
-        super(Todo.class);
+    public QnaSearchImpl() {
+        super(Qna.class);
     }
 
     @Override
-    public Page<Todo> search1(PageReqDto pageReqDto) {
+    public Page<Qna> search1(PageReqDto pageReqDto) {
         log.info("search1 .................");
 
-        QTodo todo = QTodo.todo;
+        QQna qna = QQna.qna;
 
-        JPQLQuery<Todo> query = from(todo);
+        JPQLQuery<Qna> query = from(qna);
 
         Pageable pageable = PageRequest.of(
                 pageReqDto.getPage() - 1,
@@ -33,7 +33,7 @@ public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSea
 
         this.getQuerydsl().applyPagination(pageable, query);
 
-        List<Todo> list = query.fetch();
+        List<Qna> list = query.fetch();
         long total = query.fetchCount();
 
         return new PageImpl<>(list, pageable, total);

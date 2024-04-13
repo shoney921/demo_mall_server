@@ -6,17 +6,17 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tbl_todo")
+@Table(name = "tbl_qna")
 @Getter
 @ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Todo {
+public class Qna {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long tno;
+  private long qno;
 
   private String title;
   private String writer;

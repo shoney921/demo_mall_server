@@ -1,8 +1,8 @@
 package com.example.demo_mall.mallapi.service;
 
 import com.example.demo_mall.mallapi.dto.PageReqDto;
-import com.example.demo_mall.mallapi.dto.TodoDto;
-import com.example.demo_mall.mallapi.repository.TodoRepository;
+import com.example.demo_mall.mallapi.dto.QnaDto;
+import com.example.demo_mall.mallapi.repository.QnaRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
@@ -14,49 +14,49 @@ import java.time.LocalDate;
 
 @SpringBootTest
 @Log4j2
-class TodoServiceTest {
+class QnaServiceTest {
 
     @Autowired
-    private TodoService todoService;
+    private QnaService qnaService;
     @Autowired
-    private TodoRepository todoRepository;
+    private QnaRepository qnaRepository;
 
     @Test
     public void testFind() {
         Long tno = 230L;
 
-        TodoDto todoDto = todoService.find(tno);
+        QnaDto qnaDto = qnaService.find(tno);
 
-        Assertions.assertEquals(tno, todoDto.getTno());
+        Assertions.assertEquals(tno, qnaDto.getQno());
     }
 
     @Test
     @Transactional
     public void testRegister() {
-        TodoDto todoDto = TodoDto.builder()
+        QnaDto qnaDto = QnaDto.builder()
                 .title("service Test transaction")
                 .writer("test")
                 .dueDate(LocalDate.of(2024, 02, 10))
                 .build();
 
-        Long tno = todoService.register(todoDto);
-        todoDto.setTno(tno);
+        Long tno = qnaService.register(qnaDto);
+        qnaDto.setQno(tno);
 
-        Assertions.assertEquals(todoDto, todoService.find(tno));
+        Assertions.assertEquals(qnaDto, qnaService.find(tno));
     }
 
     @Test
     @Transactional
     public void testModify() {
-        TodoDto sourceDto = TodoDto.builder()
-                .tno(230L)
+        QnaDto sourceDto = QnaDto.builder()
+                .qno(230L)
                 .title("modify test")
                 .writer("test01")
                 .build();
 
-        todoService.modify(sourceDto);
+        qnaService.modify(sourceDto);
 
-        TodoDto targetDto = todoService.find(sourceDto.getTno());
+        QnaDto targetDto = qnaService.find(sourceDto.getQno());
         Assertions.assertEquals(sourceDto, targetDto);
     }
 
@@ -65,9 +65,9 @@ class TodoServiceTest {
     public void testDelete() {
         Long tno = 230L;
 
-        todoService.remove(tno);
+        qnaService.remove(tno);
 
-        boolean exists = todoRepository.findById(tno).isPresent();
+        boolean exists = qnaRepository.findById(tno).isPresent();
         Assertions.assertFalse(exists);
     }
 
@@ -78,7 +78,7 @@ class TodoServiceTest {
                 .size(10)
                 .build();
 
-        log.info(todoService.getList(pageReqDto));
+        log.info(qnaService.getList(pageReqDto));
     }
 
 }
