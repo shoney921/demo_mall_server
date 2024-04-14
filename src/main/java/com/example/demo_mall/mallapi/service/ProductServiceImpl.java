@@ -20,7 +20,7 @@ import java.util.Optional;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
@@ -46,8 +46,10 @@ public class ProductServiceImpl implements ProductService{
                     .price(product.getPrice())
                     .build();
 
-            String imageStr = productImage.getFileName();
-            productDto.setUploadedFileNames(List.of(imageStr));
+            if (productImage != null) {
+                String imageStr = productImage.getFileName();
+                productDto.setUploadedFileNames(List.of(imageStr));
+            }
 
             return productDto;
         }).toList();
