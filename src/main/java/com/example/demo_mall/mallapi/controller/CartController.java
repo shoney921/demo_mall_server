@@ -1,5 +1,6 @@
 package com.example.demo_mall.mallapi.controller;
 
+import com.example.demo_mall.mallapi.controller.advise.ApiResponse;
 import com.example.demo_mall.mallapi.dto.CartItemDto;
 import com.example.demo_mall.mallapi.dto.CartItemListDto;
 import com.example.demo_mall.mallapi.service.CartService;
@@ -11,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "Cart API", description = "장바구니 API")
@@ -25,27 +27,24 @@ public class CartController {
     @Operation(summary = "장바구니 추가/변경", description = "장바구니 추가 : cino 미존재, 장바구니 변경 : cino 존재, 장바구니 삭제 : qty = 0 인 경우 삭제")
     @PreAuthorize("#itemDto.memberId == T(java.lang.Long).parseLong(authentication.name)")
     @PostMapping("/change")
-    public List<CartItemListDto> changeCart(@RequestBody CartItemDto itemDto) {
-        if (itemDto.getQty() <= 0) {
-            return cartService.remove(itemDto.getCino());
-        }
-        return cartService.addOrModify(itemDto);
+    public ApiResponse<List<CartItemListDto>> changeCart(@RequestBody CartItemDto itemDto) {
+        List<CartItemListDto> result = itemDto.getQty() <= 0 ? cartService.remove(itemDto.getCino())
+                : cartService.addOrModify(itemDto);
+        return ApiResponse.success(result);
     }
 
     @Operation(summary = "장바구니 아이템 조회", description = "장바구니 아이템 조회")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/items")
-    public List<CartItemListDto> getCartItems(Principal principal) {
+    public ApiResponse<List<CartItemListDto>> getCartItems(Principal principal) {
         String memberId = principal.getName();
-        log.info("login한 사용자 id:" + memberId);
-        return cartService.getCartItems(Long.parseLong(memberId));
+        return ApiResponse.success(cartService.getCartItems(Long.parseLong(memberId)));
     }
 
     @Operation(summary = "장바구니 아이템 삭제", description = "장바구니 아이템 삭제")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @DeleteMapping("/{cino}")
-    public List<CartItemListDto> removeFromCart(@PathVariable("cino") Long cino) {
-        log.info("cart item no: " + cino);
-        return cartService.remove(cino);
+    public ApiResponse<List<CartItemListDto>> removeFromCart(@PathVariable("cino") Long cino) {
+        return ApiResponse.success(cartService.remove(cino));
     }
 }

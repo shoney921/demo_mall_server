@@ -1,5 +1,6 @@
 package com.example.demo_mall.mallapi.controller;
 
+import com.example.demo_mall.mallapi.controller.advise.ApiResponse;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.example.demo_mall.mallapi.dto.PageResDto;
 import com.example.demo_mall.mallapi.dto.ProductDto;
@@ -29,24 +30,25 @@ public class ProductController {
 
     @Operation(summary = "제품 리스트 조회", description = "제품 리스트 조회")
     @GetMapping("/list")
-    public PageResDto<ProductDto> list(PageReqDto pageReqDto) {
-        return productService.getList(pageReqDto);
+    public ApiResponse<PageResDto<ProductDto>> list(PageReqDto pageReqDto) {
+        return ApiResponse.success(productService.getList(pageReqDto));
     }
 
     @Operation(summary = "제품 등록", description = "제품 등록")
     @PostMapping("/")
-    public ResultResDto register(ProductDto productDto) {
+    public ApiResponse<ResultResDto> register(ProductDto productDto) {
         List<MultipartFile> files = productDto.getFiles();
         List<String> fileNames = fileUtil.saveFiles(files);
         productDto.setUploadedFileNames(fileNames);
         Long pno = productService.register(productDto);
-        return ResultResDto.builder().result(pno.toString()).build();
+        return ApiResponse.success(ResultResDto.builder().result(pno.toString()).build());
     }
 
     @Operation(summary = "제품 정보 조회", description = "제품 정보 조회")
     @GetMapping("/{pno}")
-    public ProductDto read(@PathVariable("pno") Long pno) {
-        return productService.get(pno);
+    public ApiResponse<ProductDto> read(@PathVariable("pno") Long pno) {
+        ProductDto productDto = productService.get(pno);
+        return ApiResponse.success(productDto);
     }
 
     @Operation(summary = "제품 사진 조회", description = "제품 사진 조회")
@@ -57,7 +59,7 @@ public class ProductController {
 
     @Operation(summary = "제품 정보 변경", description = "제품 정보 변경")
     @PutMapping("/{pno}")
-    public ResultResDto modify(@PathVariable("pno") Long pno, ProductDto productDto) {
+    public ApiResponse<?> modify(@PathVariable("pno") Long pno, ProductDto productDto) {
         productDto.setPno(pno);
 
         List<MultipartFile> files = productDto.getFiles();
@@ -76,15 +78,15 @@ public class ProductController {
                     .filter(fileName -> !uploadedFileNames.contains(fileName)).toList();
             fileUtil.deleteFiles(collect);
         }
-        return ResultResDto.builder().result("success").build();
+        return ApiResponse.success(null);
     }
 
     @Operation(summary = "제품 삭제", description = "제품 삭제")
     @DeleteMapping("/{pno}")
-    public ResultResDto remove(@PathVariable("pno") Long pno) {
+    public ApiResponse<?> remove(@PathVariable("pno") Long pno) {
         ProductDto productDto = productService.get(pno);
         fileUtil.deleteFiles(productDto.getUploadedFileNames());
         productService.remove(pno);
-        return ResultResDto.builder().result("success").build();
+        return ApiResponse.success(null);
     }
 }
