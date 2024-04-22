@@ -2,11 +2,9 @@ package com.example.demo_mall.mallapi.service;
 
 
 import com.example.demo_mall.mallapi.domain.Member;
-import com.example.demo_mall.mallapi.dto.LoginResDto;
 import com.example.demo_mall.mallapi.dto.MemberDto;
 import com.example.demo_mall.mallapi.dto.MemberModifyDto;
 import com.example.demo_mall.mallapi.dto.MemberSignupDto;
-import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
@@ -25,7 +23,8 @@ public interface MemberService {
                 member.getId(),
                 member.getKakaoId(),
                 member.getEmail(),
-                member.getPw(),
+                member.getMobile(),
+                member.getPassword(),
                 member.getNickname(),
                 member.isSocial(),
                 member.getMemberRoleList().stream().map(

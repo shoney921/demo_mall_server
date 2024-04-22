@@ -40,7 +40,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             return true;
         }
         //스웨거는 필터 체크하지 않음
-        if (path.startsWith("/swagger-ui")||path.startsWith("/api-docs")) {
+        if (path.startsWith("/swagger-ui") || path.startsWith("/api-docs")) {
             return true;
         }
         return false;
@@ -62,11 +62,12 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             Integer id = (Integer) claims.get("id");
             Long kakaoId = (Long) claims.get("kakaoId");
             String email = (String) claims.get("email");
+            String mobile = (String) claims.get("mobile");
             String pw = (String) claims.get("pw");
             String nickname = (String) claims.get("nickname");
             Boolean social = (Boolean) claims.get("social");
             List<String> roleNames = (List<String>) claims.get("roleNames");
-            MemberDto memberDto = new MemberDto( id.longValue(), kakaoId, email, pw, nickname, social.booleanValue(),
+            MemberDto memberDto = new MemberDto(id.longValue(), kakaoId, email, mobile, pw, nickname, social.booleanValue(),
                     roleNames);
             log.info("-----------------------------------");
             log.info(memberDto);
@@ -74,7 +75,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
             // 2-2. SecurityContextHolder에 설정
             UsernamePasswordAuthenticationToken authenticationToken
-                    = new UsernamePasswordAuthenticationToken(memberDto,pw,memberDto.getAuthorities());
+                    = new UsernamePasswordAuthenticationToken(memberDto, pw, memberDto.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
             // 3. 성공하면 다음 필터로 간다.

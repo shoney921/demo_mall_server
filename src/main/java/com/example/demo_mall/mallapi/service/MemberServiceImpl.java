@@ -56,7 +56,8 @@ public class MemberServiceImpl implements MemberService {
         member.changeId(memberModifyDto.getId());
         member.changeNickname(memberModifyDto.getNickname());
         member.changeSocial(false);
-        member.changPw(passwordEncoder.encode(memberModifyDto.getPw()));
+        member.changPw(passwordEncoder.encode(memberModifyDto.getPassword()));
+        member.changeMobile(memberModifyDto.getMobile());
 
         memberRepository.save(member);
     }
@@ -71,7 +72,8 @@ public class MemberServiceImpl implements MemberService {
         Member member = Member.builder()
                 .email(memberSignupDto.getEmail())
                 .nickname(memberSignupDto.getNickname())
-                .pw(passwordEncoder.encode(memberSignupDto.getPw()))
+                .password(passwordEncoder.encode(memberSignupDto.getPassword()))
+                .mobile(memberSignupDto.getMobile())
                 .social(false)
                 .build();
         member.addRole(MemberRole.USER);
@@ -89,7 +91,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = Member.builder()
                 .kakaoId(kakaoId)
                 .email("")
-                .pw(passwordEncoder.encode(tempPassword))
+                .password(passwordEncoder.encode(tempPassword))
                 .nickname("")
                 .social(true)
                 .build();
@@ -135,8 +137,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Long getLongIdFromEmail(String email) {
         Optional<Member> byEmail = memberRepository.findByEmail(email);
-        if(byEmail.isEmpty()) return -1L;
-        return byEmail.get().getId();
+        Member member = byEmail.orElseThrow();
+        return member.getId();
     }
 
     @Override

@@ -9,8 +9,9 @@ public class MemberModifyDto {
 
     private String email;
 
-    private String pw;
+    private String password;
 
     private String nickname;
 
+    private String mobile;
 }

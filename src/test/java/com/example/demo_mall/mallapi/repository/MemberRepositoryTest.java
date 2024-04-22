@@ -24,7 +24,8 @@ class MemberRepositoryTest {
             Member member = Member.builder()
                     .email("user" + i + "@aaa.com")
                     .nickname("USER" + i)
-                    .pw(passwordEncoder.encode("1111"))
+                    .password(passwordEncoder.encode("1111"))
+                    .mobile("01023232" + i)
                     .build();
 
             member.addRole(MemberRole.USER);
@@ -38,18 +39,13 @@ class MemberRepositoryTest {
         }
     }
 
-
     @Test
     public void testRead() {
-        Long id = 3372524755L;
+        Long id = 1L;
 
         Member withRoles = memberRepository.getWithRoles(id);
 
         log.info(withRoles);
         log.info(withRoles.getMemberRoleList());
-
     }
-
-
-
 }

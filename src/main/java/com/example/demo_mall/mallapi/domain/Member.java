@@ -22,9 +22,11 @@ public class Member {
 
     private String email;
 
-    private String pw;
+    private String password;
 
     private String nickname;
+
+    private String mobile;
 
     private boolean social;
 
@@ -41,7 +43,7 @@ public class Member {
     }
 
     public void changPw(String pw) {
-        this.pw = pw;
+        this.password = pw;
     }
 
     public void changeSocial(boolean social) {
@@ -55,4 +57,9 @@ public class Member {
     public void changeId(Long id) {
         this.id = id;
     }
+
+    public void changeMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
 }

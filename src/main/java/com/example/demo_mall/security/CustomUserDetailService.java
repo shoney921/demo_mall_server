@@ -29,7 +29,7 @@ public class CustomUserDetailService implements UserDetailsService {
         }
         MemberDto memberDto = new MemberDto(
                 member.getId(), member.getKakaoId(),
-                member.getEmail(), member.getPw(), member.getNickname(), member.isSocial(),
+                member.getEmail(), member.getMobile(), member.getPassword(), member.getNickname(), member.isSocial(),
                 member.getMemberRoleList().stream().map(Enum::name).toList());
 
         log.info(memberDto);

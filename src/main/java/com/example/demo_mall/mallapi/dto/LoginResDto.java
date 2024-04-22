@@ -11,6 +11,7 @@ public class LoginResDto {
     private Long id;
     private String email;
     private String nickname;
+    private String mobile;
     private List<String> roleNames;
     private Boolean social;
     private String accessToken;
