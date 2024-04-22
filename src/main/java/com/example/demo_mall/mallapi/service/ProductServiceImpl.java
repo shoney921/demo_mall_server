@@ -1,7 +1,7 @@
 package com.example.demo_mall.mallapi.service;
 
-import com.example.demo_mall.mallapi.domain.Product;
-import com.example.demo_mall.mallapi.domain.ProductImage;
+import com.example.demo_mall.domain.Product;
+import com.example.demo_mall.domain.ProductImage;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.example.demo_mall.mallapi.dto.PageResDto;
 import com.example.demo_mall.mallapi.dto.ProductDto;
@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -73,14 +74,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto get(Long pno) {
         Optional<Product> productOptional = productRepository.findById(pno);
-        Product product = productOptional.orElseThrow();
+        Product product = productOptional.orElseThrow(NoSuchElementException::new);
         return entityToDto(product);
     }
 
     @Override
     public void modify(ProductDto productDto) {
         Optional<Product> productOptional = productRepository.findById((productDto.getPno()));
-        Product product = productOptional.orElseThrow();
+        Product product = productOptional.orElseThrow(NoSuchElementException::new);
 
         product.setPrice(productDto.getPrice());
         product.setPdesc(productDto.getPdesc());

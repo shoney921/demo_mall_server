@@ -1,4 +1,4 @@
-package com.example.demo_mall.mallapi.dto;
+package com.example.demo_mall.member.dto;
 
 import lombok.Builder;
 import lombok.Data;

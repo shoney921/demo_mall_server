@@ -1,6 +1,6 @@
 package com.example.demo_mall.mallapi.service;
 
-import com.example.demo_mall.mallapi.domain.Qna;
+import com.example.demo_mall.domain.Qna;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.example.demo_mall.mallapi.dto.PageResDto;
 import com.example.demo_mall.mallapi.dto.QnaDto;

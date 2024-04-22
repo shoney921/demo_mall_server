@@ -1,6 +1,6 @@
 package com.example.demo_mall.mallapi.repository;
 
-import com.example.demo_mall.mallapi.domain.Product;
+import com.example.demo_mall.domain.Product;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
@@ -14,8 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 
 import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Log4j2

@@ -1,4 +1,4 @@
-package com.example.demo_mall.mallapi.domain;
+package com.example.demo_mall.domain;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;

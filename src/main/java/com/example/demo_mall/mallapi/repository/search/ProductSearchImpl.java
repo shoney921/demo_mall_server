@@ -1,8 +1,8 @@
 package com.example.demo_mall.mallapi.repository.search;
 
-import com.example.demo_mall.mallapi.domain.Product;
-import com.example.demo_mall.mallapi.domain.QProduct;
-import com.example.demo_mall.mallapi.domain.QProductImage;
+import com.example.demo_mall.domain.Product;
+import com.example.demo_mall.domain.QProduct;
+import com.example.demo_mall.domain.QProductImage;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.example.demo_mall.mallapi.dto.PageResDto;
 import com.example.demo_mall.mallapi.dto.ProductDto;
@@ -12,7 +12,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.util.List;

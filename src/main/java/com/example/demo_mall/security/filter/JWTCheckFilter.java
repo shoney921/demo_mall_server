@@ -1,6 +1,6 @@
 package com.example.demo_mall.security.filter;
 
-import com.example.demo_mall.mallapi.dto.MemberDto;
+import com.example.demo_mall.member.dto.MemberDto;
 import com.example.demo_mall.security.util.JWTUtil;
 import com.google.gson.Gson;
 import jakarta.servlet.FilterChain;
@@ -63,11 +63,13 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             Long kakaoId = (Long) claims.get("kakaoId");
             String email = (String) claims.get("email");
             String mobile = (String) claims.get("mobile");
-            String pw = (String) claims.get("pw");
+            String pw = (String) claims.get("password");
+            String name = (String) claims.get("name");
             String nickname = (String) claims.get("nickname");
             Boolean social = (Boolean) claims.get("social");
+
             List<String> roleNames = (List<String>) claims.get("roleNames");
-            MemberDto memberDto = new MemberDto(id.longValue(), kakaoId, email, mobile, pw, nickname, social.booleanValue(),
+            MemberDto memberDto = new MemberDto(id.longValue(), kakaoId, email, mobile, pw, name, nickname, social.booleanValue(),
                     roleNames);
             log.info("-----------------------------------");
             log.info(memberDto);

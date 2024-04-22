@@ -1,6 +1,6 @@
 package com.example.demo_mall.mallapi.repository.search;
 
-import com.example.demo_mall.mallapi.domain.Qna;
+import com.example.demo_mall.domain.Qna;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import org.springframework.data.domain.Page;
 

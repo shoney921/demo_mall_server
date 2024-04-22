@@ -1,6 +1,6 @@
 package com.example.demo_mall.mallapi.repository;
 
-import com.example.demo_mall.mallapi.domain.Cart;
+import com.example.demo_mall.domain.Cart;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

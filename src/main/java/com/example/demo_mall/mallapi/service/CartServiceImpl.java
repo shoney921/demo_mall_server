@@ -1,9 +1,9 @@
 package com.example.demo_mall.mallapi.service;
 
-import com.example.demo_mall.mallapi.domain.Cart;
-import com.example.demo_mall.mallapi.domain.CartItem;
-import com.example.demo_mall.mallapi.domain.Member;
-import com.example.demo_mall.mallapi.domain.Product;
+import com.example.demo_mall.domain.Cart;
+import com.example.demo_mall.domain.CartItem;
+import com.example.demo_mall.domain.Member;
+import com.example.demo_mall.domain.Product;
 import com.example.demo_mall.mallapi.dto.CartItemDto;
 import com.example.demo_mall.mallapi.dto.CartItemListDto;
 import com.example.demo_mall.mallapi.repository.CartItemRepository;

@@ -1,8 +1,8 @@
 package com.example.demo_mall.security;
 
-import com.example.demo_mall.mallapi.domain.Member;
-import com.example.demo_mall.mallapi.dto.MemberDto;
-import com.example.demo_mall.mallapi.repository.MemberRepository;
+import com.example.demo_mall.domain.Member;
+import com.example.demo_mall.member.dto.MemberDto;
+import com.example.demo_mall.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +29,8 @@ public class CustomUserDetailService implements UserDetailsService {
         }
         MemberDto memberDto = new MemberDto(
                 member.getId(), member.getKakaoId(),
-                member.getEmail(), member.getMobile(), member.getPassword(), member.getNickname(), member.isSocial(),
+                member.getEmail(), member.getMobile(), member.getPassword(),
+                member.getName(), member.getNickname(), member.isSocial(),
                 member.getMemberRoleList().stream().map(Enum::name).toList());
 
         log.info(memberDto);

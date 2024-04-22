@@ -1,6 +1,6 @@
 package com.example.demo_mall.mallapi.repository;
 
-import com.example.demo_mall.mallapi.domain.Qna;
+import com.example.demo_mall.domain.Qna;
 import com.example.demo_mall.mallapi.repository.search.QnaSearch;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
