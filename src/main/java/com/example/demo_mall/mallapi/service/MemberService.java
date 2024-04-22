@@ -2,9 +2,11 @@ package com.example.demo_mall.mallapi.service;
 
 
 import com.example.demo_mall.mallapi.domain.Member;
+import com.example.demo_mall.mallapi.dto.LoginResDto;
 import com.example.demo_mall.mallapi.dto.MemberDto;
 import com.example.demo_mall.mallapi.dto.MemberModifyDto;
 import com.example.demo_mall.mallapi.dto.MemberSignupDto;
+import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
@@ -35,4 +37,8 @@ public interface MemberService {
     Long create(MemberSignupDto memberSignupDto);
 
     Long getLongIdFromEmail(String email);
+
+    Member getMemberByEmail(String email);
+
+
 }

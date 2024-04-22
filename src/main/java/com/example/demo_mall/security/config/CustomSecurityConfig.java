@@ -40,7 +40,7 @@ public class CustomSecurityConfig {
                         .permitAll()
                 )
                 .formLogin(cf -> cf
-                        .loginPage("/api/member/login")
+//                        .loginPage("/api/member/login")
                         .successHandler(new APILoginSuccessHandler())
                         .failureHandler(new APILoginFailHandler())
                 )

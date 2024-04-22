@@ -1,7 +1,6 @@
 package com.example.demo_mall.mallapi.dto;
 
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 

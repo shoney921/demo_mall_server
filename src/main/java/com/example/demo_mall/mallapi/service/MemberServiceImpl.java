@@ -138,4 +138,10 @@ public class MemberServiceImpl implements MemberService {
         if(byEmail.isEmpty()) return -1L;
         return byEmail.get().getId();
     }
+
+    @Override
+    public Member getMemberByEmail(String email) {
+        Optional<Member> byEmail = memberRepository.findByEmail(email);
+       return byEmail.orElseThrow();
+    }
 }
