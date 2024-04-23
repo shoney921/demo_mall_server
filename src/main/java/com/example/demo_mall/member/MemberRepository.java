@@ -20,5 +20,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findByEmail(String eamil);
 
+    @Query("select m.email from Member m where m.name = :name and m.mobile = :mobile")
+    Optional<String> getEmailByNameAndMobile(String name, String mobile);
 
+    boolean existsMemberByEmailAndNameAndMobile(String email, String name, String mobile);
 }

@@ -138,13 +138,27 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Long getLongIdFromEmail(String email) {
         Optional<Member> byEmail = memberRepository.findByEmail(email);
-        Member member = byEmail.orElseThrow();
+        Member member = byEmail.orElseThrow(NoSuchElementException::new);
         return member.getId();
     }
 
     @Override
     public Member getMemberByEmail(String email) {
         Optional<Member> byEmail = memberRepository.findByEmail(email);
-       return byEmail.orElseThrow();
+       return byEmail.orElseThrow(NoSuchElementException::new);
+    }
+
+    @Override
+    public String findEmailByMemberInfo(String name, String mobile) {
+        String email = memberRepository.getEmailByNameAndMobile(name, mobile)
+                .orElseThrow(()->new NoSuchElementException("회원을 찾을 수 없습니다."));
+        return email;
+    }
+
+    @Override
+    public Boolean existMemberByMemberInfo(String name, String mobile, String email) {
+        boolean b = memberRepository.existsMemberByEmailAndNameAndMobile(email, name, mobile);
+        if(!b) throw new NoSuchElementException("회원을 찾을 수 없습니다.");
+        return b;
     }
 }

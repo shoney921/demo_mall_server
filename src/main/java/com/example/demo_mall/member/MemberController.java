@@ -75,4 +75,18 @@ public class MemberController {
         Long id = memberService.getLongIdFromEmail(email);
         return ApiResponse.success(id);
     }
+
+    @Operation(summary = "아이디 찾기", description = "회원명과 전화번호로 회원 아이디를 찾습니다.")
+    @GetMapping("/email")
+    public ApiResponse<String> findIdByMemberInfo(@RequestParam("name") String name, @RequestParam("mobile") String mobile) {
+        String email = memberService.findEmailByMemberInfo(name, mobile);
+        return ApiResponse.success(email);
+    }
+
+    @Operation(summary = "비밀번호 찾기", description = "이메일로 등록된 회원의 비밀번호를 재설정할 수 있는 링크를 전송합니다.")
+    @PostMapping("/reset-password")
+    public ApiResponse<Boolean> resetPassword(@RequestParam("name") String name,@RequestParam("mobile") String mobile,@RequestParam("email") String email) {
+        Boolean b = memberService.existMemberByMemberInfo(name, mobile, email);
+        return ApiResponse.success(b);
+    }
 }

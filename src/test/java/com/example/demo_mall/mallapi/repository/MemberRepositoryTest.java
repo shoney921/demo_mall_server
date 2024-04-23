@@ -54,4 +54,54 @@ class MemberRepositoryTest {
         log.info(withRoles);
         log.info(withRoles.getMemberRoleList());
     }
+
+    @Test
+    public void getEmailByNameAndMobile_ValidInput_ReturnsEmail_RealDB() {
+        // Given
+        String name = "이상헌";
+        String mobile = "01066876050";
+        String expectedEmail = "ddmczp@naver.com";
+
+        // When
+        String actualEmail = memberRepository.getEmailByNameAndMobile(name, mobile).orElseThrow();
+
+        // Then
+        assertEquals(expectedEmail, actualEmail);
+    }
+
+
+    @Test
+    public void getEmailByNameAndMobile_ValidInput_ReturnsEmail() {
+        // Given
+        String name = "이상헌";
+        String mobile = "01066876050";
+        String expectedEmail = "example@example.com";
+
+        MemberRepository memberRepositoryMock = mock(MemberRepository.class);
+        when(memberRepositoryMock.getEmailByNameAndMobile(name, mobile)).thenReturn(Optional.of(expectedEmail));
+
+        // When
+        String actualEmail = memberRepositoryMock.getEmailByNameAndMobile(name, mobile).orElseThrow();
+
+        // Then
+        assertEquals(expectedEmail, actualEmail);
+        verify(memberRepositoryMock, times(1)).getEmailByNameAndMobile(name, mobile);
+    }
+
+    @Test
+    public void getEmailByNameAndMobile_InvalidInput_ReturnsNull() {
+        // Given
+        String name = "InvalidName";
+        String mobile = "InvalidMobile";
+
+        MemberRepository memberRepositoryMock = mock(MemberRepository.class);
+        when(memberRepositoryMock.getEmailByNameAndMobile(name, mobile)).thenReturn(null);
+
+        // When
+        String actualEmail = memberRepositoryMock.getEmailByNameAndMobile(name, mobile).orElseThrow();
+
+        // Then
+        assertEquals(null, actualEmail);
+        verify(memberRepositoryMock, times(1)).getEmailByNameAndMobile(name, mobile);
+    }
 }

@@ -41,5 +41,7 @@ public interface MemberService {
 
     Member getMemberByEmail(String email);
 
+    String findEmailByMemberInfo(String name, String phoneNumber);
 
+    Boolean existMemberByMemberInfo(String name, String mobile, String email);
 }
