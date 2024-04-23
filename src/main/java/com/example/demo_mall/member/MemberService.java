@@ -1,12 +1,13 @@
-package com.example.demo_mall.mallapi.service;
+package com.example.demo_mall.member;
 
 
-import com.example.demo_mall.mallapi.domain.Member;
-import com.example.demo_mall.mallapi.dto.MemberDto;
-import com.example.demo_mall.mallapi.dto.MemberModifyDto;
-import com.example.demo_mall.mallapi.dto.MemberSignupDto;
+import com.example.demo_mall.domain.Member;
+import com.example.demo_mall.member.dto.MemberDto;
+import com.example.demo_mall.member.dto.MemberModifyDto;
+import com.example.demo_mall.member.dto.MemberSignupDto;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -25,6 +26,7 @@ public interface MemberService {
                 member.getEmail(),
                 member.getMobile(),
                 member.getPassword(),
+                member.getName(),
                 member.getNickname(),
                 member.isSocial(),
                 member.getMemberRoleList().stream().map(

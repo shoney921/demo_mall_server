@@ -1,12 +1,18 @@
 package com.example.demo_mall.mallapi.repository;
 
-import com.example.demo_mall.mallapi.domain.Member;
-import com.example.demo_mall.mallapi.domain.MemberRole;
+import com.example.demo_mall.domain.Member;
+import com.example.demo_mall.domain.MemberRole;
+import com.example.demo_mall.member.MemberRepository;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @Log4j2

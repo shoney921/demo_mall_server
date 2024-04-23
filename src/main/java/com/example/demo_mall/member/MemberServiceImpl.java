@@ -1,11 +1,10 @@
-package com.example.demo_mall.mallapi.service;
+package com.example.demo_mall.member;
 
-import com.example.demo_mall.mallapi.domain.Member;
-import com.example.demo_mall.mallapi.domain.MemberRole;
-import com.example.demo_mall.mallapi.dto.MemberDto;
-import com.example.demo_mall.mallapi.dto.MemberModifyDto;
-import com.example.demo_mall.mallapi.dto.MemberSignupDto;
-import com.example.demo_mall.mallapi.repository.MemberRepository;
+import com.example.demo_mall.domain.Member;
+import com.example.demo_mall.domain.MemberRole;
+import com.example.demo_mall.member.dto.MemberDto;
+import com.example.demo_mall.member.dto.MemberModifyDto;
+import com.example.demo_mall.member.dto.MemberSignupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpEntity;
@@ -19,6 +18,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.LinkedHashMap;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -51,13 +51,13 @@ public class MemberServiceImpl implements MemberService {
     public void modifyMember(MemberModifyDto memberModifyDto) {
         Optional<Member> result = memberRepository.findById(memberModifyDto.getId());
 
-        Member member = result.orElseThrow();
-
+        Member member = result.orElseThrow(NoSuchElementException::new);
         member.changeId(memberModifyDto.getId());
         member.changeNickname(memberModifyDto.getNickname());
         member.changeSocial(false);
         member.changPw(passwordEncoder.encode(memberModifyDto.getPassword()));
         member.changeMobile(memberModifyDto.getMobile());
+        member.changeName(memberModifyDto.getName());
 
         memberRepository.save(member);
     }
@@ -71,6 +71,7 @@ public class MemberServiceImpl implements MemberService {
     public Long create(MemberSignupDto memberSignupDto) {
         Member member = Member.builder()
                 .email(memberSignupDto.getEmail())
+                .name(memberSignupDto.getName())
                 .nickname(memberSignupDto.getNickname())
                 .password(passwordEncoder.encode(memberSignupDto.getPassword()))
                 .mobile(memberSignupDto.getMobile())

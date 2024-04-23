@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Aspect
-@RestControllerAdvice(basePackages = {"com.example.demo_mall.mallapi.controller"})
+@RestControllerAdvice(basePackages = {"com.example.demo_mall.mallapi.controller", "com.example.demo_mall.member"})
 public class CustomControllerAdvice { // todo : [팀싱크] restControllerAdvice
 
     @ExceptionHandler(NoSuchElementException.class)

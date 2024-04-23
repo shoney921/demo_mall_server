@@ -1,4 +1,4 @@
-package com.example.demo_mall.mallapi.dto;
+package com.example.demo_mall.member.dto;
 
 import lombok.Data;
 
@@ -14,4 +14,6 @@ public class MemberModifyDto {
     private String nickname;
 
     private String mobile;
+
+    private String name;
 }

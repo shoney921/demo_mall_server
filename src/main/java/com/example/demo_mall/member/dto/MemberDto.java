@@ -1,4 +1,4 @@
-package com.example.demo_mall.mallapi.dto;
+package com.example.demo_mall.member.dto;
 
 import lombok.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,13 +22,15 @@ public class MemberDto extends User {
 
     private String password;
 
+    private String name;
+
     private String nickname;
 
     private boolean social;
 
     private List<String> roleNames = new ArrayList<>();
 
-    public MemberDto(Long id, Long kakaoId, String email, String mobile, String password, String nickname, boolean social, List<String> roleNames) {
+    public MemberDto(Long id, Long kakaoId, String email, String mobile, String password, String name, String nickname, boolean social, List<String> roleNames) {
         //super(username, password, authorities);
         super(id.toString(), password, roleNames.stream().map(roleName ->
                 new SimpleGrantedAuthority("ROLE_" + roleName)).collect(Collectors.toList()));
@@ -37,6 +39,7 @@ public class MemberDto extends User {
         this.email = email;
         this.mobile = mobile;
         this.password = password;
+        this.name = name;
         this.nickname = nickname;
         this.social = social;
         this.roleNames = roleNames;

@@ -1,6 +1,6 @@
-package com.example.demo_mall.mallapi.repository;
+package com.example.demo_mall.member;
 
-import com.example.demo_mall.mallapi.domain.Member;
+import com.example.demo_mall.domain.Member;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

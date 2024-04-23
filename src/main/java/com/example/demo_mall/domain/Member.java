@@ -1,4 +1,4 @@
-package com.example.demo_mall.mallapi.domain;
+package com.example.demo_mall.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,6 +23,8 @@ public class Member {
     private String email;
 
     private String password;
+
+    private String name;
 
     private String nickname;
 
@@ -60,6 +62,10 @@ public class Member {
 
     public void changeMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public void changeName(String name) {
+        this.name = name;
     }
 
 }

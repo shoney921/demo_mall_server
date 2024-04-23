@@ -1,9 +1,8 @@
-package com.example.demo_mall.mallapi.controller;
+package com.example.demo_mall.member;
 
 import com.example.demo_mall.mallapi.controller.advise.ApiResponse;
-import com.example.demo_mall.mallapi.domain.Member;
-import com.example.demo_mall.mallapi.dto.*;
-import com.example.demo_mall.mallapi.service.MemberService;
+import com.example.demo_mall.domain.Member;
+import com.example.demo_mall.member.dto.*;
 import com.example.demo_mall.security.CustomUserDetailService;
 import com.example.demo_mall.security.util.JWTUtil;
 import io.swagger.v3.oas.annotations.Operation;
