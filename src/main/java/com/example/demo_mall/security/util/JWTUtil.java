@@ -24,7 +24,7 @@ public class JWTUtil {
     private static String key = "1234567890123456789012345678901234567890";
 
     public static LoginResDto convertMemberDtoToLoginResDto(MemberDto memberDto) {
-        String jwtAccessToken = JWTUtil.generateToken(memberDto.getClaims(), 10);
+        String jwtAccessToken = JWTUtil.generateToken(memberDto.getClaims(), 60);
         String jwtRefreshToken = JWTUtil.generateToken(memberDto.getClaims(), 60 * 24);
         LoginResDto loginResDto = LoginResDto.builder()
                 .accessToken(jwtAccessToken)
