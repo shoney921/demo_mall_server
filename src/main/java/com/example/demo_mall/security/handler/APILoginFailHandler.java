@@ -1,5 +1,6 @@
 package com.example.demo_mall.security.handler;
 
+import com.example.demo_mall.mallapi.controller.advise.ApiResponse;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +18,8 @@ public class APILoginFailHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         log.info("Login fail....." + exception);
-        String jsonStr = new Gson().toJson(Map.of("error", "ERROR_LOGIN"));
+        ApiResponse<Object> errorLogin = ApiResponse.error("1002", "ERROR_LOGIN");
+        String jsonStr = new Gson().toJson(errorLogin);
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
         printWriter.println(jsonStr);

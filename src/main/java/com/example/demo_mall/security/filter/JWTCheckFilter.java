@@ -1,5 +1,6 @@
 package com.example.demo_mall.security.filter;
 
+import com.example.demo_mall.mallapi.controller.advise.ApiResponse;
 import com.example.demo_mall.member.dto.MemberDto;
 import com.example.demo_mall.security.util.JWTUtil;
 import com.google.gson.Gson;
@@ -85,9 +86,8 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
         } catch (Exception e) {
             log.error("JWT Check Error..............");
-            log.error(e.getMessage());
-
-            String msg = new Gson().toJson(Map.of("error", "ERROR_ACCESS_TOKEN"));
+            ApiResponse<Object> errorAccessToken = ApiResponse.error("1001", "ERROR_ACCESS_TOKEN");
+            String msg = new Gson().toJson(errorAccessToken);
             response.setContentType("application/json");
             PrintWriter printWriter = response.getWriter();
             printWriter.println(msg);

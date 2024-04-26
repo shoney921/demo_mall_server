@@ -1,5 +1,6 @@
 package com.example.demo_mall.security.handler;
 
+import com.example.demo_mall.mallapi.controller.advise.ApiResponse;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,8 +17,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        Gson gson = new Gson();
-        String jsonStr = gson.toJson(Map.of("error", "ERROR_ACCESSDENIED"));
+        ApiResponse<Object> errorLogin = ApiResponse.error("1003", "ERROR_ACCESS_DENIED");
+        String jsonStr = new Gson().toJson(errorLogin);
         response.setContentType("application/json");
         response.setStatus(HttpStatus.FORBIDDEN.value());
         PrintWriter printWriter = response.getWriter();
