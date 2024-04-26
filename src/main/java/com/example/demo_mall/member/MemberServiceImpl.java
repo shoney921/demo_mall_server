@@ -55,7 +55,7 @@ public class MemberServiceImpl implements MemberService {
         member.changeId(memberModifyDto.getId());
         member.changeNickname(memberModifyDto.getNickname());
         member.changeSocial(false);
-        member.changPw(passwordEncoder.encode(memberModifyDto.getPassword()));
+        member.changePassword(passwordEncoder.encode(memberModifyDto.getPassword()));
         member.changeMobile(memberModifyDto.getMobile());
         member.changeName(memberModifyDto.getName());
 

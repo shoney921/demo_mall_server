@@ -47,8 +47,8 @@ public class Member {
         memberRoleList.clear();
     }
 
-    public void changePw(String pw) {
-        this.password = pw;
+    public void changePassword(String password) {
+        this.password = password;
     }
 
     public void changeSocial(boolean social) {
