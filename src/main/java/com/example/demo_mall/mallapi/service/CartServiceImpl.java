@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Log4j2
@@ -38,7 +39,7 @@ public class CartServiceImpl implements CartService {
 
         if (cino != null) {
             Optional<CartItem> cartItemResult = cartItemRepository.findById(cino);
-            CartItem cartItem = cartItemResult.orElseThrow();
+            CartItem cartItem = cartItemResult.orElseThrow(NoSuchElementException::new);
             cartItem.changeQty(qty);
             cartItemRepository.save(cartItem);
             return getCartItems(memberId);
