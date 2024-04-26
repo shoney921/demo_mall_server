@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Arrays;
 
 @OpenAPIDefinition(
-        info = @Info(title = "User-Service API 명세서",
+        info = @Info(title = "API 명세서",
                 description = "사용자 어플 서비스 API 명세서",
                 version = "v1"))
 @Configuration
