@@ -14,4 +14,6 @@ public interface MemberAddressRepository extends JpaRepository<MemberAddress, Lo
 
     List<MemberAddress> findByMemberId(Long memberId);
 
+
+
 }

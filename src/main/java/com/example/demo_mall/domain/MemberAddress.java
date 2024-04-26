@@ -1,13 +1,13 @@
 package com.example.demo_mall.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Getter
 @Table(name = "member_address")
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"member"})
 public class MemberAddress {

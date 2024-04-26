@@ -1,13 +1,15 @@
-package com.example.demo_mall.memberaddress;
+package com.example.demo_mall.memberaddress.dto;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class MemberAddressDto {
-    private Long memberId;
+@NoArgsConstructor
+@AllArgsConstructor
+public class MemberAddressResDto {
     private Long ano;
     private String name;
     private String zipCode;
