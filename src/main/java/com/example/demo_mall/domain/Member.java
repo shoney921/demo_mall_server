@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = "memberRoleList")
+@ToString(exclude = {"memberRoleList", "addresses"})
 public class Member {
 
     @Id
@@ -36,6 +36,9 @@ public class Member {
     @Builder.Default
     private List<MemberRole> memberRoleList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberAddress> addresses = new ArrayList<>();
+
     public void addRole(MemberRole memberRole) {
         memberRoleList.add(memberRole);
     }
@@ -44,7 +47,7 @@ public class Member {
         memberRoleList.clear();
     }
 
-    public void changPw(String pw) {
+    public void changePw(String pw) {
         this.password = pw;
     }
 
@@ -52,7 +55,7 @@ public class Member {
         this.social = social;
     }
 
-    public void changeNickname(String nickname){
+    public void changeNickname(String nickname) {
         this.nickname = nickname;
     }
 
