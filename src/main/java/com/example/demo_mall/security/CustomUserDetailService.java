@@ -1,8 +1,8 @@
 package com.example.demo_mall.security;
 
-import com.example.demo_mall.domain.Member;
-import com.example.demo_mall.member.dto.MemberDto;
-import com.example.demo_mall.member.MemberRepository;
+import com.example.demo_mall.mallapi.domain.Member;
+import com.example.demo_mall.mallapi.dto.member.MemberDto;
+import com.example.demo_mall.mallapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.userdetails.UserDetails;

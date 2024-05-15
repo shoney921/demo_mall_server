@@ -1,8 +1,7 @@
 package com.example.demo_mall.mallapi.repository;
 
-import com.example.demo_mall.domain.Member;
-import com.example.demo_mall.domain.MemberRole;
-import com.example.demo_mall.member.MemberRepository;
+import com.example.demo_mall.mallapi.domain.Member;
+import com.example.demo_mall.mallapi.domain.MemberRole;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
 package com.example.demo_mall.mallapi.repository;
 
-import com.example.demo_mall.domain.Cart;
-import com.example.demo_mall.domain.CartItem;
-import com.example.demo_mall.domain.Member;
-import com.example.demo_mall.domain.Product;
+import com.example.demo_mall.mallapi.domain.Cart;
+import com.example.demo_mall.mallapi.domain.CartItem;
+import com.example.demo_mall.mallapi.domain.Member;
+import com.example.demo_mall.mallapi.domain.Product;
 import com.example.demo_mall.mallapi.dto.CartItemListDto;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;

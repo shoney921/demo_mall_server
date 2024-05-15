@@ -1,6 +1,6 @@
 package com.example.demo_mall.security.handler;
 
-import com.example.demo_mall.member.dto.MemberDto;
+import com.example.demo_mall.mallapi.dto.member.MemberDto;
 import com.example.demo_mall.security.util.JWTUtil;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;

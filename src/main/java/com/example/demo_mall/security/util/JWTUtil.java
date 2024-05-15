@@ -1,7 +1,7 @@
 package com.example.demo_mall.security.util;
 
-import com.example.demo_mall.member.dto.LoginResDto;
-import com.example.demo_mall.member.dto.MemberDto;
+import com.example.demo_mall.mallapi.dto.member.LoginResDto;
+import com.example.demo_mall.mallapi.dto.member.MemberDto;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;

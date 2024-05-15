@@ -1,8 +1,8 @@
 package com.example.demo_mall.mallapi.repository.search;
 
-import com.example.demo_mall.domain.Product;
-import com.example.demo_mall.domain.QProduct;
-import com.example.demo_mall.domain.QProductImage;
+import com.example.demo_mall.mallapi.domain.Product;
+import com.example.demo_mall.mallapi.domain.QProduct;
+import com.example.demo_mall.mallapi.domain.QProductImage;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.example.demo_mall.mallapi.dto.PageResDto;
 import com.example.demo_mall.mallapi.dto.ProductDto;

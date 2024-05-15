@@ -1,7 +1,7 @@
 package com.example.demo_mall.mallapi.repository.search;
 
-import com.example.demo_mall.domain.QQna;
-import com.example.demo_mall.domain.Qna;
+import com.example.demo_mall.mallapi.domain.QQna;
+import com.example.demo_mall.mallapi.domain.Qna;
 import com.example.demo_mall.mallapi.dto.PageReqDto;
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
