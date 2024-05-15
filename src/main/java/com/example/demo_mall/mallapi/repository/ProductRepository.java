@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface ProductRepository extends JpaRepository<Product, Long>, ProductSearch {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // ElementCollection 조인해서 조회하는 방법
     @EntityGraph(attributePaths = "imageList")
