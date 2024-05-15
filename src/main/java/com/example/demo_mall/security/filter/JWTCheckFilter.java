@@ -36,8 +36,8 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         if (path.startsWith("/api/member/")) {
             return true;
         }
-        //이미지 조회 경로는 체크하지 않음
-        if (path.startsWith("/api/products/view/")) {
+        // 상품은 모두 볼수있도록 변경
+        if (path.startsWith("/api/products/")) {
             return true;
         }
         //스웨거는 필터 체크하지 않음
