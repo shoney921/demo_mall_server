@@ -1,20 +1,24 @@
 package com.example.demo_mall.mallapi.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "tbl_order")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "order_number", nullable = false, unique = true)
-    private String orderNumber;
+    private Long ono;
 
     @Column(name = "order_date", nullable = false)
     private LocalDateTime orderDate;
@@ -26,7 +30,7 @@ public class Order {
     // 주문과 상품은 다대다 관계라고 가정
     @ManyToMany
     @JoinTable(
-            name = "order_products",
+            name = "tbl_order_products",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )

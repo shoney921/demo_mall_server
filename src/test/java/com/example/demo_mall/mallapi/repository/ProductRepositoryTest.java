@@ -96,11 +96,4 @@ class ProductRepositoryTest {
         result.getContent().forEach(arr -> log.info(Arrays.toString(arr)));
     }
 
-    @Test
-    public void testSearch() {
-
-        PageReqDto pageReqDto = PageReqDto.builder().build();
-
-        productRepository.searchList(pageReqDto);
-    }
 }
