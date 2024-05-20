@@ -39,11 +39,6 @@ public class CustomSecurityConfig {
                         .anyRequest()
                         .permitAll()
                 )
-                .formLogin(cf -> cf
-//                        .loginPage("/api/member/login")
-                        .successHandler(new APILoginSuccessHandler())
-                        .failureHandler(new APILoginFailHandler()) 
-                )
                 .addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(cf ->
                         cf.accessDeniedHandler(new CustomAccessDeniedHandler())
